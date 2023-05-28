@@ -68,5 +68,5 @@ lazy.setup({
 
 -- Might as well set up an easy-access keybinding
 
-require("mapping").map("n", "<leader>L", lazy.show, "Show Lazy")
-require("alpha")
+-- require("mapping").map("n", "<leader>L", lazy.show, "Show Lazy")
+-- require("alpha")

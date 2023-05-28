@@ -1,7 +1,8 @@
-for _, core in ipairs{
+for _, core in ipairs {
 	"core.utils",
 	"core.bootstrap",
 	"core.lazy",
+	"core.mappings",
 } do
 	local status_ok, err = pcall(require, core)
 	if not status_ok then

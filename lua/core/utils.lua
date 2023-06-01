@@ -38,8 +38,8 @@ function U.set_mappings(map_table, base)
           cmd = options[1]
           keymap_opts = vim.tbl_deep_extend("force", keymap_opts, options)
           keymap_opts[1] = nil
-          print("keymap_opts")
-          print_table(keymap_opts)
+          -- print("keymap_opts")
+          -- print_table(keymap_opts)
         end
         if not cmd or keymap_opts.name then -- if which-key mapping, queue it
           if not U.which_key_queue then U.which_key_queue = {} end
@@ -49,7 +49,7 @@ function U.set_mappings(map_table, base)
           print_table(U.which_key_queue)
         else -- if not which-key mapping, set it
           vim.keymap.set(mode, keymap, cmd, keymap_opts)
-          print("vim.km "..tostring(mode).." "..tostring(keymap).." "..tostring(cmd).." "..tostring(keymap_opts))
+          -- print("vim.km "..tostring(mode).." "..tostring(keymap).." "..tostring(cmd).." "..tostring(keymap_opts))
         end
       end
     end

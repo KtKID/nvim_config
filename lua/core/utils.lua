@@ -13,6 +13,12 @@ function print_table(t, indent)
   end
 end
 
+function print_stack(...)
+    -- 获取当前堆栈信息
+    local traceback = debug.traceback("", 2)
+    print(traceback, ...)
+end
+
 --- Check if a plugin is defined in lazy. Useful with lazy loading when a plugin is not necessarily loaded yet
 ---@param plugin string The plugin to search for
 ---@return boolean available # Whether the plugin is available
@@ -46,7 +52,7 @@ function U.set_mappings(map_table, base)
           if not U.which_key_queue[mode] then U.which_key_queue[mode] = {} end
           U.which_key_queue[mode][keymap] = keymap_opts
           print("queue")
-          print_table(U.which_key_queue)
+          -- print_table(U.which_key_queue)
         else -- if not which-key mapping, set it
           vim.keymap.set(mode, keymap, cmd, keymap_opts)
           -- print("vim.km "..tostring(mode).." "..tostring(keymap).." "..tostring(cmd).." "..tostring(keymap_opts))

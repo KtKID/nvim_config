@@ -10,8 +10,3 @@ print(vim.fn.stdpath("data"))
 print(vim.fn.stdpath("cache"))
 
 print_table(core)
--- core.install = 
-
--- local function load_module_file(module)
---     local found_module = nil
--- end

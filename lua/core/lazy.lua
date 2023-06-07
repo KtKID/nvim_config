@@ -24,8 +24,8 @@ require("mapping").set_leader(" ")
 lazy.setup({
   spec = {
     -- add LazyVim and import its plugins 没什么必要
-    -- { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     -- import any extras modules here
+    -- { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     -- { import = "lazyvim.plugins.extras.lang.typescript" },
     -- { import = "lazyvim.plugins.extras.lang.json" },
     -- { import = "lazyvim.plugins.extras.ui.mini-animate" },

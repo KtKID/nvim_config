@@ -1,7 +1,6 @@
 return {
   {
     "williamboman/mason.nvim",
-    enabled = false,
     cmd = {
       "Mason",
       "MasonInstall",
@@ -13,9 +12,9 @@ return {
     },
     opts = {
       ensure_installed = {
-        -- "stylua",
-        -- "shfmt",
-        -- "flake8",
+        "stylua",
+        "shfmt",
+        "flake8",
       },
       ui = {
         icons = {

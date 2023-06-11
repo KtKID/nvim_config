@@ -41,6 +41,8 @@ return {
       else
         ensure_installed()
       end
+
+      -- require("plugins/config/mason-lspconfig")
     end
   },
 }

@@ -18,6 +18,9 @@ local sections = {
 }
 if not vim.g.icons_enabled then vim.tbl_map(function(opts) opts.desc = opts.desc:gsub("^.* ", "") end, sections) end
 
+maps.n["<leader>b"] = sections.b
+maps.n["<leader>bb"] = {function () print("lead bb") end, desc = "xgt bb"}
+
 -- Plugin Manager
 local lazy = require "lazy"
 maps.n["<leader>p"] = sections.p
@@ -26,7 +29,6 @@ maps.n["<leader>ps"] = { function() lazy.home() end, desc = "Plugins Status" }
 maps.n["<leader>pS"] = { function() lazy.sync() end, desc = "Plugins Sync" }
 maps.n["<leader>pu"] = { function() lazy.check() end, desc = "Plugins Check Updates" }
 maps.n["<leader>pU"] = { function() lazy.update() end, desc = "Plugins Update" }
-
 
 -- Alpha
 if is_available "alpha-nvim" then

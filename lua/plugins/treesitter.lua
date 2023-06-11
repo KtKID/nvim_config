@@ -23,16 +23,15 @@ return {
       enable = true,
       disable = function(_, bufnr) return vim.api.nvim_buf_line_count(bufnr) > 10000 end,-- 大于10000不高亮
     },
-    incremental_selection = { enable = true },
-    -- incremental_selection = {
-    --   enable = true,
-    --   keymaps = {
-    --     init_selection = "<C-space>",
-    --     node_incremental = "<C-space>",
-    --     scope_incremental = false,
-    --     node_decremental = "<bs>",
-    --   },
-    -- },
+    incremental_selection = {
+      enable = true,
+      keymaps = {
+        init_selection = "<C-space>",
+        node_incremental = "<C-space>",
+        scope_incremental = false,
+        node_decremental = "<bs>",
+      },
+    },
     indent = { enable = true },
     autotag = { enable = true },
     context_commentstring = { enable = true, enable_autocmd = false },

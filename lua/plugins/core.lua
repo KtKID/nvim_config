@@ -30,5 +30,25 @@ return {
         --     end
         -- end,
     },
-    "nvim-lua/plenary.nvim",
+    { "nvim-lua/plenary.nvim", },
+    {
+        "nvim-neo-tree/neo-tree.nvim", --TODO 配置快捷键
+        dependencies = {
+            "nvim-tree/nvim-web-devicons",
+            "MunifTanjim/nui.nvim",
+        },
+        event = "VeryLazy",
+        print("neo tree!!"),
+        config = require("plugins/config/neo-tree"),
+    },
+    -- {
+    --     "folke/noice.nvim",
+    --     dependencies = {
+    --         "MunifTanjim/nui.nvim",
+    --         "rcarriga/nvim-notify",
+    --     },
+    --     config = function()
+    --     	require("plugins/config/noice")()
+    --     end,
+    -- },
 }

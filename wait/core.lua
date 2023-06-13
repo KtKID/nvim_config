@@ -47,14 +47,4 @@ return {
     -- 	require("plugins/config/noice")()
     -- end,
   },
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
-      "MunifTanjim/nui.nvim",
-    },
-    event = "VeryLazy",
-    print("neo tree!!"),
-    config = require("plugins/config/neo-tree"),
-  },
 }

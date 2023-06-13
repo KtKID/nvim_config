@@ -14,9 +14,9 @@ function print_table(t, indent)
 end
 
 function print_stack(...)
-    -- 获取当前堆栈信息
-    local traceback = debug.traceback("", 2)
-    print(traceback, ...)
+  -- 获取当前堆栈信息
+  local traceback = debug.traceback("", 2)
+  print(traceback, ...)
 end
 
 --- Check if a plugin is defined in lazy. Useful with lazy loading when a plugin is not necessarily loaded yet
@@ -60,15 +60,18 @@ function U.set_mappings(map_table, base)
       end
     end
   end
-  if package.loaded["which-key"] then U.which_key_register() end -- if which-key is loaded already, register
+  U.which_key_register()
 end
 
 --- Register queued which-key mappings 注册which-key的队列映射
 function U.which_key_register()
+  print("which_key_register0")
   if U.which_key_queue then
     local wk_avail, wk = pcall(require, "which-key")
     if wk_avail then
+      print("which_key_register")
       for mode, registration in pairs(U.which_key_queue) do
+        print_table(registration)
         wk.register(registration, { mode = mode })
       end
       U.which_key_queue = nil

@@ -13,6 +13,10 @@ return {
     },
     -- Colorscheme
     {
-        { "ellisonleao/gruvbox.nvim", priority = 1000 },
+        {
+            "ellisonleao/gruvbox.nvim",
+            priority = 1000,
+            config = require("plugins.config.colorscheme")
+        },
     }
 }

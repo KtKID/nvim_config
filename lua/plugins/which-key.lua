@@ -13,10 +13,10 @@ return {
 			icons = { group = vim.g.icons_enabled and "" or "+", separator = "" },
 			disable = { filetypes = { "TelescopePrompt" } },
 		},
-		config = function()
-			local wk = require("which-key")
-			wk.setup()
-			require("core.utils").which_key_register()
-		end
+		-- config = function()
+		-- 	local wk = require("which-key")
+		-- 	wk.setup()
+		-- 	require("core.utils").which_key_register()
+		-- end
 	}
 }

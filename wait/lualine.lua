@@ -23,8 +23,8 @@ return {
         section_separators = { left = "", right = "" },
     },
     sections = {
-        lualine_a = { { "mode", separator = { left = "" }, right_padding = 2 } },
-        lualine_b = {
+        lualine_b = { { "mode", separator = { left = "" }, right_padding = 2 } },
+        lualine_a = {
             { "branch" },
             { "diff" },
         },

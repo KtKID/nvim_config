@@ -11,7 +11,6 @@ if not vim.loop.fs_stat(lazypath) then
   })
 end
 vim.opt.rtp:prepend(lazypath)
-print("lazy path: " .. lazypath)
 -- Use a protected call so we don't error out on first use
 local ok, lazy = pcall(require, "lazy")
 if not ok then
@@ -19,13 +18,13 @@ if not ok then
 end
 
 -- We have to set the leader key here for lazy.nvim to work
-require("mapping").set_leader(" ")
+-- require("mapping").set_leader(" ")
 
 lazy.setup({
   spec = {
     -- add LazyVim and import its plugins
     -- import any extras modules here
-    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+    -- { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     -- { import = "lazyvim.plugins.extras.lang.typescript" },
     -- { import = "lazyvim.plugins.extras.lang.json" },
     -- { import = "lazyvim.plugins.extras.ui.mini-animate" },
@@ -41,7 +40,7 @@ lazy.setup({
     version = false, -- always use the latest git commit
     -- version = "*", -- try installing the latest stable version for plugins that support semver
   },
-  install = { colorscheme = { "tokyonight", "habamax" } },
+  install = { colorscheme = { "gruvbox", "habamax" } },
   checker = { enabled = true }, -- automatically check for plugin updates
   performance = {
     rtp = {

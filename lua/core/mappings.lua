@@ -1,6 +1,9 @@
 local utils = require "core.utils"
 local is_available = utils.is_available
 
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+
 -- i = insert mode n = normal mode v = visual mode t = terminal mode
 local maps = { i = {}, n = {}, v = {}, t = {} }
 

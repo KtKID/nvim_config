@@ -1,4 +1,3 @@
-print("alpha start")
 return {
   "goolord/alpha-nvim",
   event = "VimEnter",
@@ -37,7 +36,6 @@ return {
     return dashboard
   end,
   config = function(_, dashboard)
-    print("alpha config")
     -- close Lazy and re-open when the dashboard is ready
     if vim.o.filetype == "lazy" then
       vim.cmd.close()

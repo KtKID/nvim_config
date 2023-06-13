@@ -4,9 +4,9 @@ _G.core = {}
 core.plugins = {}
 core.plugins.path = vim.fn.stdpath("config").."/lua/plugins"
 
-print("this is Bootstrap")
+-- print("this is Bootstrap")
 
-print(vim.fn.stdpath("data"))
-print(vim.fn.stdpath("cache"))
+-- print(vim.fn.stdpath("data"))
+-- print(vim.fn.stdpath("cache"))
 
-print_table(core)
+-- print_table(core)

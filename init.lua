@@ -1,3 +1,7 @@
+
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+
 for _, core in ipairs {
 	"core.utils",
 	"core.bootstrap",
@@ -10,4 +14,3 @@ for _, core in ipairs {
 		print("Error loading " .. core .. "\n\n" .. err)
 	end
 end
-print("nvim config start")

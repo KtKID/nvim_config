@@ -30,7 +30,7 @@ return {
         --     end
         -- end,
     },
-    { "nvim-lua/plenary.nvim", },
+    { "nvim-lua/plenary.nvim", lazy = true },
     {
         "nvim-neo-tree/neo-tree.nvim", --TODO 配置快捷键
         dependencies = {
@@ -38,6 +38,7 @@ return {
             "MunifTanjim/nui.nvim",
         },
         event = "VeryLazy",
+        -- cmd = "ntree",
         print("neo tree!!"),
         config = require("plugins/config/neo-tree"),
     },

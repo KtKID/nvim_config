@@ -1,9 +1,6 @@
 local utils = require "core.utils"
 local is_available = utils.is_available
 
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
-
 -- i = insert mode n = normal mode v = visual mode t = terminal mode
 local maps = { i = {}, n = {}, v = {}, t = {} }
 
@@ -11,6 +8,7 @@ local sections = {
   b = { desc = "󰓩 Buffers" },
   bs = { desc = "󰒺 Sort Buffers" },
   d = { desc = " Debugger" },
+  e = { desc = " Debugger123" },
   f = { desc = "󰍉 Find" },
   g = { desc = "󰊢 Git" },
   l = { desc = " LSP" },
@@ -19,10 +17,35 @@ local sections = {
   t = { desc = " Terminal" },
   u = { desc = " UI" },
 }
+
+print("et= "..tostring(sections.e.desc))
 if not vim.g.icons_enabled then vim.tbl_map(function(opts) opts.desc = opts.desc:gsub("^.* ", "") end, sections) end
 
-maps.n["<leader>b"] = sections.b
-maps.n["<leader>bb"] = {function () print("lead bb") end, desc = "xgt bb"}
+-- Window
+maps.n["<C-h>"] = { "<C-W>h" }
+maps.n["<C-l>"] = { "<C-W>l" }
+maps.n["<C-j>"] = { "<C-W>j" }
+maps.n["<C-k>"] = { "<C-W>k" }
+
+maps.n["<leader>q"] = { ":qa<CR>", desc = " Quit" }
+
+-- Buffers
+maps.n["<leader>b"] = { desc = "󰓩 Buffers" } -- sections.b
+maps.n["<leader>bb"] = { function() print("lead bb") end, desc = "xgt bb" }
+
+-- Explorer
+maps.n["<leader>e"] = {
+  function()
+    require("neo-tree.command").execute({ toggle = true, dir = vim.fn.stdpath("config") })
+  end,
+  desc = " Explorer Neotree Config"
+}
+maps.n["<leader>E"] = {
+  function()
+    require("neo-tree.command").execute({ toggle = true, dir = vim.loop.cwd() })
+  end,
+  desc = " Explorer Neotree Root"
+}
 
 -- Plugin Manager
 local lazy = require "lazy"
@@ -60,11 +83,11 @@ if is_available "telescope.nvim" then
     function()
       local cwd = vim.fn.stdpath "config" .. "/.."
       local search_dirs = {}
-      for _, dir in ipairs(astronvim.supported_configs) do -- search all supported config locations
-        if dir == astronvim.install.home then dir = dir .. "/lua/user" end -- don't search the astronvim core files
+      for _, dir in ipairs(astronvim.supported_configs) do                      -- search all supported config locations
+        if dir == astronvim.install.home then dir = dir .. "/lua/user" end      -- don't search the astronvim core files
         if vim.fn.isdirectory(dir) == 1 then table.insert(search_dirs, dir) end -- add directory to search if exists
       end
-      if vim.tbl_isempty(search_dirs) then -- if no config folders found, show warning
+      if vim.tbl_isempty(search_dirs) then                                      -- if no config folders found, show warning
         utils.notify("No user configuration files found", vim.log.levels.WARN)
       else
         if #search_dirs == 1 then cwd = search_dirs[1] end -- if only one directory, focus cwd
@@ -79,7 +102,7 @@ if is_available "telescope.nvim" then
   }
   maps.n["<leader>fb"] = { function() require("telescope.builtin").buffers() end, desc = "Find buffers" }
   maps.n["<leader>fc"] =
-    { function() require("telescope.builtin").grep_string() end, desc = "Find for word under cursor" }
+  { function() require("telescope.builtin").grep_string() end, desc = "Find for word under cursor" }
   maps.n["<leader>fC"] = { function() require("telescope.builtin").commands() end, desc = "Find commands" }
   maps.n["<leader>ff"] = { function() require("telescope.builtin").find_files() end, desc = "Find files" }
   maps.n["<leader>fF"] = {
@@ -91,12 +114,12 @@ if is_available "telescope.nvim" then
   maps.n["<leader>fm"] = { function() require("telescope.builtin").man_pages() end, desc = "Find man" }
   if is_available "nvim-notify" then
     maps.n["<leader>fn"] =
-      { function() require("telescope").extensions.notify.notify() end, desc = "Find notifications" }
+    { function() require("telescope").extensions.notify.notify() end, desc = "Find notifications" }
   end
   maps.n["<leader>fo"] = { function() require("telescope.builtin").oldfiles() end, desc = "Find history" }
   maps.n["<leader>fr"] = { function() require("telescope.builtin").registers() end, desc = "Find registers" }
   maps.n["<leader>ft"] =
-    { function() require("telescope.builtin").colorscheme { enable_preview = true } end, desc = "Find themes" }
+  { function() require("telescope.builtin").colorscheme { enable_preview = true } end, desc = "Find themes" }
   maps.n["<leader>fw"] = { function() require("telescope.builtin").live_grep() end, desc = "Find words" }
   maps.n["<leader>fW"] = {
     function()
@@ -121,5 +144,6 @@ if is_available "telescope.nvim" then
   }
 end
 
-
+print("ready set mappings")
+print_table(maps)
 utils.set_mappings(maps)

@@ -60,6 +60,7 @@ function U.set_mappings(map_table, base)
       end
     end
   end
+  print("which_key_register")
   U.which_key_register()
 end
 

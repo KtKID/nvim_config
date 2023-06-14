@@ -18,7 +18,7 @@ local sections = {
   u = { desc = " UI" },
 }
 
-print("et= "..tostring(sections.e.desc))
+print("et= " .. tostring(sections.e.desc))
 if not vim.g.icons_enabled then vim.tbl_map(function(opts) opts.desc = opts.desc:gsub("^.* ", "") end, sections) end
 
 -- Window
@@ -144,6 +144,6 @@ if is_available "telescope.nvim" then
   }
 end
 
-print("ready set mappings")
-print_table(maps)
+-- print("ready set mappings")
+-- print_table(maps)
 utils.set_mappings(maps)

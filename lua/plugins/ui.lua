@@ -8,7 +8,7 @@ return {
         config = function()
             -- require("plugins.config.test_line")()
             require("plugins.config.lualine-config")
-            require("notify")("lua line loaded")
+            -- require("notify")("lua line loaded")
         end,
     },
     -- Colorscheme

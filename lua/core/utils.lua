@@ -51,7 +51,6 @@ function U.set_mappings(map_table, base)
           if not U.which_key_queue then U.which_key_queue = {} end
           if not U.which_key_queue[mode] then U.which_key_queue[mode] = {} end
           U.which_key_queue[mode][keymap] = keymap_opts
-          print("queue")
           -- print_table(U.which_key_queue)
         else -- if not which-key mapping, set it
           vim.keymap.set(mode, keymap, cmd, keymap_opts)
@@ -60,19 +59,16 @@ function U.set_mappings(map_table, base)
       end
     end
   end
-  print("which_key_register")
   U.which_key_register()
 end
 
 --- Register queued which-key mappings 注册which-key的队列映射
 function U.which_key_register()
-  print("which_key_register0")
   if U.which_key_queue then
     local wk_avail, wk = pcall(require, "which-key")
     if wk_avail then
-      print("which_key_register")
       for mode, registration in pairs(U.which_key_queue) do
-        print_table(registration)
+        -- print_table(registration)
         wk.register(registration, { mode = mode })
       end
       U.which_key_queue = nil

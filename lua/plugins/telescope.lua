@@ -1,8 +1,10 @@
 return {
     "nvim-telescope/telescope.nvim",
     dependencies = {
+        { "nvim-lua/plenary.nvim"},
         { "nvim-telescope/telescope-fzf-native.nvim", },
     },
+    enabled = false,
     cmd = "Telescope",
     version = false, -- telescope did only one release, so use HEAD for now
     {
@@ -79,11 +81,11 @@ return {
     },
     opts = function()
         local actions = require "telescope.actions"
-        local get_icon = require("astronvim.utils").get_icon
+        -- local get_icon = require("astronvim.utils").get_icon
         return {
             defaults = {
-                prompt_prefix = string.format("%s ", get_icon "Search"),
-                selection_caret = string.format("%s ", get_icon "Selected"),
+                -- prompt_prefix = string.format("%s ", get_icon "Search"),
+                -- selection_caret = string.format("%s ", get_icon "Selected"),
                 path_display = { "truncate" },
                 sorting_strategy = "ascending",
                 layout_config = {

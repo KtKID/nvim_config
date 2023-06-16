@@ -15,6 +15,7 @@ return {
         "stylua",
         "shfmt",
         "flake8",
+        "lua-language-server",
       },
       ui = {
         icons = {
@@ -42,6 +43,7 @@ return {
         ensure_installed()
       end
 
+      -- require("plugins/config/mason-lspconfig").setup()
       -- require("plugins/config/mason-lspconfig")
     end
   },

@@ -18,7 +18,6 @@ local sections = {
   u = { desc = " UI" },
 }
 
-print("et= " .. tostring(sections.e.desc))
 if not vim.g.icons_enabled then vim.tbl_map(function(opts) opts.desc = opts.desc:gsub("^.* ", "") end, sections) end
 
 -- Window
@@ -74,6 +73,7 @@ end
 if is_available "telescope.nvim" then
   maps.n["<leader>f"] = sections.f
   maps.n["<leader>g"] = sections.g
+  maps.n["<leader>f`"] = { function() require("telescope.builtin").reloader() end, desc = "Git branches" }
   maps.n["<leader>gb"] = { function() require("telescope.builtin").git_branches() end, desc = "Git branches" }
   maps.n["<leader>gc"] = { function() require("telescope.builtin").git_commits() end, desc = "Git commits" }
   maps.n["<leader>gt"] = { function() require("telescope.builtin").git_status() end, desc = "Git status" }
@@ -105,17 +105,24 @@ if is_available "telescope.nvim" then
   { function() require("telescope.builtin").grep_string() end, desc = "Find for word under cursor" }
   maps.n["<leader>fC"] = { function() require("telescope.builtin").commands() end, desc = "Find commands" }
   maps.n["<leader>ff"] = { function() require("telescope.builtin").find_files() end, desc = "Find files" }
+  -- maps.n["<leader>ff"] = { function() require("telescope.builtin").find_files(require('telescope.themes').get_dropdown({})) end, desc = "Find files" }
   maps.n["<leader>fF"] = {
     function() require("telescope.builtin").find_files { hidden = true, no_ignore = true } end,
     desc = "Find all files",
   }
   maps.n["<leader>fh"] = { function() require("telescope.builtin").help_tags() end, desc = "Find help" }
   maps.n["<leader>fk"] = { function() require("telescope.builtin").keymaps() end, desc = "Find keymaps" }
+
+  --Layout
+  maps.n["<leader>fl"] = {
+    function() require 'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({})) end,
+    desc = "Find man" }
+
   maps.n["<leader>fm"] = { function() require("telescope.builtin").man_pages() end, desc = "Find man" }
-  if is_available "nvim-notify" then
-    maps.n["<leader>fn"] =
-    { function() require("telescope").extensions.notify.notify() end, desc = "Find notifications" }
-  end
+  -- if is_available "nvim-notify" then
+  --   maps.n["<leader>fn"] =
+  --   { function() require("telescope").extensions.notify.notify() end, desc = "Find notifications" }
+  -- end
   maps.n["<leader>fo"] = { function() require("telescope.builtin").oldfiles() end, desc = "Find history" }
   maps.n["<leader>fr"] = { function() require("telescope.builtin").registers() end, desc = "Find registers" }
   maps.n["<leader>ft"] =

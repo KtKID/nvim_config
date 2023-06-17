@@ -1,7 +1,7 @@
 return {
   "nvim-treesitter/nvim-treesitter",
   dependencies = { "windwp/nvim-ts-autotag", "JoosepAlviste/nvim-ts-context-commentstring" },
-  event = "User AstroFile",
+  event = "VeryLazy",
   cmd = {
     "TSBufDisable",
     "TSBufEnable",
@@ -57,8 +57,6 @@ return {
     },
   },
   config = function (_, opts)
-    print("treesitter config")
-    print_table(opts)
     if type(opts.ensure_installed) == "table" then
       ---@type table<string, boolean>
       local added = {}

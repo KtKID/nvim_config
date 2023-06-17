@@ -19,6 +19,11 @@ function print_stack(...)
   print(traceback, ...)
 end
 
+-- 滑动窗口tips
+function notify_show(msg)
+  vim.notify(msg)
+end
+
 --- Check if a plugin is defined in lazy. Useful with lazy loading when a plugin is not necessarily loaded yet
 ---@param plugin string The plugin to search for
 ---@return boolean available # Whether the plugin is available

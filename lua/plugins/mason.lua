@@ -49,6 +49,7 @@ return {
   },
   {
     "williamboman/mason-lspconfig.nvim",
+    event = "VeryLazy",
     config = function()
       require("mason-lspconfig").setup {
         ensure_installed = { "lua_ls" },
@@ -58,12 +59,7 @@ return {
         -- and will be called for each installed server that doesn't have
         -- a dedicated handler.
         function(server_name) -- default handler (optional)
-          print("mason-lspconfig handler " .. tostring(server_name))
-          require("lspconfig")[server_name].setup {
-            on_attach = function(client, bufnr)
-              print_table(client)
-            end
-          }
+          require("lspconfig")[server_name].setup { }
         end,
         -- Next, you can provide a dedicated handler for specific servers.
         -- For example, a handler override for the `rust_analyzer`:

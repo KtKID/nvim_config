@@ -25,18 +25,37 @@ return {
             vim.notify = require("notify")
         end
     },
-    { "nvim-lua/plenary.nvim", lazy = true },
     {
-        "nvim-neo-tree/neo-tree.nvim", --TODO 配置快捷键
+        "nvim-lua/plenary.nvim", lazy = true
+    },
+    {
+        "nvim-tree/nvim-tree.lua",
+        version = "*",
+        event = "VeryLazy",
         dependencies = {
             "nvim-tree/nvim-web-devicons",
-            "MunifTanjim/nui.nvim",
         },
-        event = "VeryLazy",
-        -- cmd = "ntree",
-        print("neo tree!!"),
-        config = require("plugins/config/neo-tree"),
+        config = function()
+            require("plugins/config/nvim-tree")
+        end
     },
+    -- {
+    --     'anuvyklack/pretty-fold.nvim',--折叠代码
+    --     config = function()
+    --         require('pretty-fold').setup()
+    --     end
+    -- },
+    -- {
+    --     "nvim-neo-tree/neo-tree.nvim", --TODO 配置快捷键
+    --     dependencies = {
+    --         "nvim-tree/nvim-web-devicons",
+    --         "MunifTanjim/nui.nvim",
+    --     },
+    --     event = "VeryLazy",
+    --     -- cmd = "ntree",
+    --     print("neo tree!!"),
+    --     config = require("plugins/config/neo-tree"),
+    -- },
     -- {
     --     "folke/noice.nvim",
     --     dependencies = {

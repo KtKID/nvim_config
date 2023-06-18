@@ -1,6 +1,9 @@
 local utils = require "core.utils"
 local is_available = utils.is_available
 
+-- 原生vim命令
+vim.api.nvim_set_keymap("i", "ii", "<Esc>", { noremap = true })
+
 -- i = insert mode n = normal mode v = visual mode t = terminal mode
 local maps = { i = {}, n = {}, v = {}, t = {} }
 
@@ -20,6 +23,7 @@ local sections = {
 
 if not vim.g.icons_enabled then vim.tbl_map(function(opts) opts.desc = opts.desc:gsub("^.* ", "") end, sections) end
 
+
 -- Window
 maps.n["<C-h>"] = { "<C-W>h" }
 maps.n["<C-l>"] = { "<C-W>l" }
@@ -35,13 +39,37 @@ maps.n["<leader>bb"] = { function() print("lead bb") end, desc = "xgt bb" }
 -- Explorer
 maps.n["<leader>e"] = {
   function()
-    require("neo-tree.command").execute({ toggle = true, dir = vim.fn.stdpath("config") })
+    -- require("neo-tree.command").execute({ toggle = true, dir = vim.fn.stdpath("config") })
+    local tree = require("plugins.config.nvim-tree")
+    if tree.toggle() then
+      local filePath = vim.fn.expand('%:p')
+      if filePath then
+        print(filePath)
+        require("nvim-tree.api").tree.open({ find_file = true })
+      else
+        print("2")
+        require("nvim-tree.api").tree.open({ path = vim.fn.stdpath("config") })
+      end
+    end
   end,
   desc = " Explorer Neotree Config"
 }
-maps.n["<leader>E"] = {
+maps.n["<leader>Et"] = {
   function()
-    require("neo-tree.command").execute({ toggle = true, dir = vim.loop.cwd() })
+    local tree = require("plugins.config.nvim-tree")
+    tree.toggle_replace()
+  end
+}
+maps.n["<leader>Ed"] = {
+  function()
+    -- require("neo-tree.command").execute({ toggle = true, dir = vim.loop.cwd() })
+    local dirPath = vim.fn.expand('%:p:h')
+    if dirPath then
+      print(dirPath)
+      require("nvim-tree.api").tree.open({ path = dirPath })
+    else
+      print("no file")
+    end
   end,
   desc = " Explorer Neotree Root"
 }
@@ -116,7 +144,8 @@ if is_available "telescope.nvim" then
   --Layout
   maps.n["<leader>fl"] = {
     function() require 'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({})) end,
-    desc = "Find man" }
+    desc = "Find man"
+  }
 
   maps.n["<leader>fm"] = { function() require("telescope.builtin").man_pages() end, desc = "Find man" }
   -- if is_available "nvim-notify" then

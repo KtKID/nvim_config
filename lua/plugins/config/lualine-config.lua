@@ -210,13 +210,12 @@ ins_right {
 
 ins_right {
     function()
-        return '▊'
+        -- return '▊'
+        return ""
     end,
     color = { fg = colors.blue },
     padding = { left = 1 },
 }
 
-print("lualine config loaded")
-print(config)
 local lualine = require("lualine")
 lualine.setup(config)

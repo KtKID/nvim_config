@@ -56,14 +56,15 @@ return {
     --     print("neo tree!!"),
     --     config = require("plugins/config/neo-tree"),
     -- },
-    -- {
-    --     "folke/noice.nvim",
-    --     dependencies = {
-    --         "MunifTanjim/nui.nvim",
-    --         "rcarriga/nvim-notify",
-    --     },
-    --     config = function()
-    --     	require("plugins/config/noice")()
-    --     end,
-    -- },
+    {
+        "folke/noice.nvim",
+        event = "VeryLazy",
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+            "rcarriga/nvim-notify",
+        },
+        config = function()
+        	require("plugins/config/noice")()
+        end,
+    },
 }

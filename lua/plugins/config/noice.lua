@@ -1,10 +1,10 @@
 return function()
-	local myopts = require("custom_opts")
+	-- local myopts = require("custom_opts")
 
 	require("noice").setup({
 		cmdline = {
 			enabled = true, -- enables the Noice cmdline UI
-			view = myopts.cmdline_view, -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
+			view = "cmdline_popup", -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
 			opts = {}, -- global options for the cmdline. See section on views
 			---@type table<string, CmdlineFormat>
 			format = {
@@ -30,8 +30,8 @@ return function()
 		messages = {
 			-- NOTE: If you enable messages, then the cmdline is enabled automatically.
 			-- This is a current Neovim limitation.
-			enabled = not myopts.close_message_notify, -- enables the Noice messages UI
-			view = "mini", -- default view for messages
+			enabled = true, -- enables the Noice messages UI
+			view = "notify", -- default view for messages
 			view_error = "notify", -- view for errors
 			view_warn = "notify", -- view for warnings
 			view_history = "messages", -- view for :messages
@@ -47,7 +47,7 @@ return function()
 		},
 		-- you can enable a preset for easier configuration
 		presets = {
-			bottom_search = true, -- use a classic bottom cmdline for search
+			bottom_search = false, -- use a classic bottom cmdline for search
 			command_palette = true, -- position the cmdline and popupmenu together
 			long_message_to_split = true, -- long messages will be sent to a split
 			inc_rename = false, -- enables an input dialog for inc-rename.nvim

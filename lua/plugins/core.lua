@@ -39,6 +39,41 @@ return {
             require("plugins/config/nvim-tree")
         end
     },
+    {
+        "folke/noice.nvim", --还没配置完
+        event = "VeryLazy",
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+            "rcarriga/nvim-notify",
+        },
+        config = function()
+            require("plugins/config/noice")()
+        end,
+    },
+    {
+        "Shatur/neovim-session-manager",
+        event = "VeryLazy",
+        dependencies = {
+            "nvim-lua/plenary.nvim"
+        },
+        -- config = require("plugins.config.session-config")
+    },
+    {
+        "SmiteshP/nvim-navic",
+        -- lazy = true,
+        -- event = "BufEnter",
+        -- require("nvim-navic").setup()
+    },
+    {
+          "rebelot/heirline.nvim",
+        event = "BufEnter",
+        dependencies={
+            "SmiteshP/nvim-navic",
+        },
+        config = function ()
+            require("plugins.config.heirline-config")
+        end
+    },
     -- {
     --     'anuvyklack/pretty-fold.nvim',--折叠代码
     --     config = function()
@@ -56,15 +91,4 @@ return {
     --     print("neo tree!!"),
     --     config = require("plugins/config/neo-tree"),
     -- },
-    {
-        "folke/noice.nvim",
-        event = "VeryLazy",
-        dependencies = {
-            "MunifTanjim/nui.nvim",
-            "rcarriga/nvim-notify",
-        },
-        config = function()
-        	require("plugins/config/noice")()
-        end,
-    },
 }

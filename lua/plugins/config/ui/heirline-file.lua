@@ -64,7 +64,8 @@ file.FileSize = {
 
 file.ScrollBar = {
     static = {
-        sbar = { '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█' }
+        -- sbar = { '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█' }
+        sbar = { '', '', '', '', '', '', '', '' }
         -- Another variant, because the more choice the better.
         -- sbar = { '🭶', '🭷', '🭸', '🭹', '🭺', '🭻' }
     },
@@ -72,9 +73,9 @@ file.ScrollBar = {
         local curr_line = vim.api.nvim_win_get_cursor(0)[1]
         local lines = vim.api.nvim_buf_line_count(0)
         local i = math.floor((curr_line - 1) / lines * #self.sbar) + 1
-        return string.rep(self.sbar[i], 2)
+        return self.sbar[i]-- string.rep(self.sbar[i], 2)
     end,
-    hl = { fg = "#33ff33", bg = "#000000" },
+    hl = { fg = "#33ff33", },
 }
 file.Ruler = {
     -- %l = current line number

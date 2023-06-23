@@ -45,10 +45,10 @@ local colors = {
 
 local configPath = "plugins.config.ui."
 
-local file = require(configPath .. "heirline-file")
+local File = require(configPath .. "heirline-file")
 local LspUI = require(configPath .. "heirline-lsp")
 local VimodeUI = require(configPath .. "heirline-vimode")
-VimodeUI = utils.surround({ "", "" }, "bright_bg", { VimodeUI, Snippets })
+VimodeUI = utils.surround({ "█", "█" }, "bright_bg", { VimodeUI, Snippets })
 local Tab = require(configPath .. "heirline-tab")
 
 -- 对齐
@@ -59,6 +59,18 @@ local space = {
         provider = " ",
     },
 }
+
+local VmodeUI =
+{
+    condition = function()
+        return conditions.buffer_matches({
+            -- buftype = { "nofile", "prompt", "help", "quickfix", },
+            -- filetype = { "^git.*", "fugitive", "*.lua" },
+            filetype = { "lua" },
+        })
+    end,
+    VimodeUI,
+}
 local FileStatusLine = {
     condition = function()
         return conditions.buffer_matches({
@@ -67,10 +79,18 @@ local FileStatusLine = {
             filetype = { "lua" },
         })
     end,
-    space, file.FileSize, space, file.FileIcon, file.FileType, space, file.Ruler, file.ScrollBar, space,
-    file.FileEncoding,
     space,
-    file.FileFormat
+    File.FileSize,
+    space,
+    File.FileIcon,
+    File.FileType,
+    space,
+    File.Ruler,
+    File.ScrollBar,
+    space,
+    File.FileEncoding,
+    space,
+    File.FileFormat
 }
 
 local DefaultStatusLine = {
@@ -78,18 +98,24 @@ local DefaultStatusLine = {
 local SpecialStatusline = {
 }
 local LspStatusLine = {
-    LspUI,LspUI.Diagnostics,
+    LspUI, LspUI.Diagnostics,
+}
+
+local InactiveStatusline = {
+    condition = conditions.is_not_active,
+    VimodeUI
 }
 
 -- 最外层
 local StatusLine = {
-    VimodeUI, LspStatusLine,Align, space , FileStatusLine,
+    VmodeUI, LspStatusLine, Align, space, FileStatusLine,
 }
 local WinBar = {
-FileStatusLine
 }
 local TabLine = {
-    -- Tab.TablineFileName
+    Tab.TabLineOffset,
+    Tab.BufferLine,
+    Tab.TabPages
 }
 
 local heir = require("heirline").setup({
@@ -98,6 +124,18 @@ local heir = require("heirline").setup({
     tabline = TabLine,
     opts = {
         colors = colors,
+        -- if the callback returns true, the winbar will be disabled for that window
+        -- the args parameter corresponds to the table argument passed to autocommand callbacks. :h nvim_lua_create_autocmd()
+        disable_winbar_cb = function(args)
+            return conditions.buffer_matches({
+                buftype = { "nofile", "prompt", "help", "quickfix" },
+                -- 这里加上不显示的文件类型
+                filetype = { "^git.*", "fugitive", "Trouble", "dashboard", "NvimTree" },
+            }, args.buf)
+        end,
     }
 })
+-- Yep, with heirline we're driving manual!
+vim.o.showtabline = 2
+vim.cmd([[au FileType * if index(['wipe', 'delete'], &bufhidden) >= 0 | set nobuflisted | endif]])
 return heir

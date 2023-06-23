@@ -213,7 +213,7 @@ ins_right {
         -- return '▊'
         return ""
     end,
-    color = { fg = colors.blue },
+    color = { fg = colors.red },
     padding = { left = 1 },
 }
 

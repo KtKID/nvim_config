@@ -32,9 +32,39 @@ maps.n["<C-k>"] = { "<C-W>k" }
 
 maps.n["<leader>q"] = { ":qa<CR>", desc = " Quit" }
 
+-- Tab
+-- 切换到前一个 tab
+maps.n["]t"] = { function() vim.cmd.tabnext() end, desc = "Next tab" }
+maps.n["[t"] = { function() vim.cmd.tabprevious() end, desc = "Previous tab" }
+maps.n["<leader>w"] = { function() vim.cmd.tabclose() end, desc = "Close Cur tab" }
+
 -- Buffers
 maps.n["<leader>b"] = { desc = "󰓩 Buffers" } -- sections.b
-maps.n["<leader>bb"] = { function() print("lead bb") end, desc = "xgt bb" }
+maps.n["<A-h>"] = { "<cmd>bprev<cr>", desc = "Previous Buffer" }
+maps.n["<A-l>"] = { "<cmd>bnext<cr>", desc = "Next Buffer" }
+maps.n["<A-q>"] = {
+  function()
+    -- 获取当前窗口的缓冲区号
+    local bufnr = vim.api.nvim_get_current_buf()
+
+    vim.cmd("bprevious")
+
+    -- 关闭当前文件所在的缓冲区
+    vim.api.nvim_buf_delete(bufnr, { force = false })
+  end,
+  desc = "Close Cur Buffer"
+}
+
+-- File
+maps.n["<C-s>"] = { "<cmd>w<cr>", desc = "Save" }
+maps.n["<C-q>"] = {
+  function()
+    print("lead <C>q")
+    local tree = require("plugins.config.nvim-tree")
+    tree.set_focus()
+  end,
+  desc = "Save"
+}
 
 -- Explorer
 maps.n["<leader>e"] = {
@@ -46,14 +76,15 @@ maps.n["<leader>e"] = {
       if filePath then
         print(filePath)
         require("nvim-tree.api").tree.open({ find_file = true })
+        -- require("nvim-tree.api").tree.change_root({ filePath })
       else
-        print("2")
         require("nvim-tree.api").tree.open({ path = vim.fn.stdpath("config") })
       end
     end
   end,
   desc = " Explorer Neotree Config"
 }
+maps.n["<leader>E"] = { desc = " nvim-tree" }
 maps.n["<leader>Et"] = {
   function()
     local tree = require("plugins.config.nvim-tree")
@@ -132,7 +163,10 @@ if is_available "telescope.nvim" then
   maps.n["<leader>fc"] =
   { function() require("telescope.builtin").grep_string() end, desc = "Find for word under cursor" }
   maps.n["<leader>fC"] = { function() require("telescope.builtin").commands() end, desc = "Find commands" }
-  maps.n["<leader>ff"] = { function() require("telescope.builtin").find_files() end, desc = "Find files" }
+  maps.n["<leader>ff"] = {
+    function() require("telescope.builtin").find_files({ enable_preview = false }) end,
+    desc = "Find files"
+  }
   -- maps.n["<leader>ff"] = { function() require("telescope.builtin").find_files(require('telescope.themes').get_dropdown({})) end, desc = "Find files" }
   maps.n["<leader>fF"] = {
     function() require("telescope.builtin").find_files { hidden = true, no_ignore = true } end,
@@ -177,6 +211,22 @@ if is_available "telescope.nvim" then
       end
     end,
     desc = "Search symbols",
+  }
+
+
+  maps.n["<leader>u"] = sections.u
+
+  maps.n["<leader>c"] = { "<cmd>lua require('telescope.builtin').colorscheme({enable_preview = true})<cr>" }
+  --   function ()
+  --   require('telescope.builtin').colorscheme({enable_preview = true})
+  -- end, desc = "colorscheme"}
+
+  maps.n["<leader>u1"] = "gruvbox"
+  maps.n["<leader>u1m"] = "mode"
+  maps.n["<leader>u1mm"] = {
+    function()
+      -- local box = require("gruvbox")
+    end
   }
 end
 

@@ -62,7 +62,6 @@ local Navic = {
         end
     },
     init = function(self)
-        print("heri lsp init")
         local data = require("nvim-navic").get_data() or {}
         local children = {}
         -- create a child for each level
@@ -125,21 +124,27 @@ local lsp = {
     provider  = function()
         local names = {}
         local a = 1
+        local active = false
         for i, server in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
-            if a == 1 then
-                print("server name: " .. server.name)
-                a = 2
-            end
             table.insert(names, server.name)
+            active = true
         end
-        return " [" .. table.concat(names, " ") .. "]"
+        if active then
+            return " [" .. table.concat(names, " ") .. "]"
+        else
+            return " Not LSP Activated"
+        end
     end,
     hl        = { fg = "green", bold = true },
 }
 
 lsp.Diagnostics = {
 
-    condition = conditions.has_diagnostics and conditions.lsp_attached,
+    -- condition = conditions.is_active, conditions.has_diagnostics and conditions.lsp_attached and conditions.buffer_matches({
+    --     buftype = {},
+    --     filetype = { },
+    -- }),
+    condition = false,
 
     static = {
         error_icon = vim.fn.sign_getdefined("DiagnosticSignError")[1].text,
@@ -158,7 +163,7 @@ lsp.Diagnostics = {
     update = { "DiagnosticChanged", "BufEnter" },
 
     {
-        provider = "![",
+        provider = "[ 󰩂 ",
     },
     {
         provider = function(self)

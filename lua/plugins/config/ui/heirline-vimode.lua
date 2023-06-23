@@ -46,19 +46,19 @@ local ViMode = {
             t = "T",
         },
         mode_colors = {
-            n = "red" ,
+            n = "red",
             i = "#33ff33",
             v = "cyan",
-            V =  "cyan",
-            ["\22"] =  "cyan",
-            c =  "orange",
-            s =  "purple",
-            S =  "purple",
-            ["\19"] =  "purple",
-            R =  "orange",
-            r =  "orange",
-            ["!"] =  "red",
-            t =  "red",
+            V = "cyan",
+            ["\22"] = "cyan",
+            c = "orange",
+            s = "purple",
+            S = "purple",
+            ["\19"] = "purple",
+            R = "orange",
+            r = "orange",
+            ["!"] = "red",
+            t = "red",
         }
     },
     -- We can now access the value of mode() that, by now, would have been
@@ -69,7 +69,7 @@ local ViMode = {
     -- control the padding and make sure our string is always at least 2
     -- characters long. Plus a nice Icon.
     provider = function(self)
-        return "  %2("..self.mode_names[self.mode].."%)"
+        return " 󰪆 %2(" .. self.mode_names[self.mode] .. "%)"
     end,
     -- Same goes for the highlight. Now the foreground will change according to the current mode.
     hl = function(self)

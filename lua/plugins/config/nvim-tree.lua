@@ -113,7 +113,7 @@ local function on_attach(buff)
 
     vim.keymap.set('n', '<C-o>', tree.open_file_with_newtab, opts('CD'))
     vim.keymap.set('n', '<C-t>', api.node.open.tab, opts('Open: New Tab'))
-    vim.keymap.set('n', '<C-]>', api.tree.change_root_to_node, opts('CD'))
+    vim.keymap.set('n', '.', api.tree.change_root_to_node, opts('CD'))
     vim.keymap.set('n', '<C-e>', api.node.open.replace_tree_buffer, opts('Open: In Place'))
     vim.keymap.set('n', '<C-f>', function ()
             local filePath = vim.fn.expand('%:p')

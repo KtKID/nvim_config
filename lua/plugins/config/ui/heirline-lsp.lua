@@ -135,7 +135,7 @@ local lsp = {
             return " Not LSP Activated"
         end
     end,
-    hl        = { fg = "green", bold = true },
+    -- hl        = { fg = "green", bold = true },
 }
 
 lsp.Diagnostics = {

@@ -141,43 +141,6 @@ vim.api.nvim_create_autocmd({ "VimEnter", "UIEnter", "BufAdd", "BufDelete" }, {
     end,
 })
 
-local TablinePicker = {
-    condition = function(self)
-        return self._show_picker
-    end,
-    init = function(self)
-        local bufname = vim.api.nvim_buf_get_name(self.bufnr)
-        bufname = vim.fn.fnamemodify(bufname, ":t")
-        local label = bufname:sub(1, 1)
-        local i = 2
-        while self._picker_labels[label] do
-            if i > #bufname then
-                break
-            end
-            label = bufname:sub(i, i)
-            i = i + 1
-        end
-        self._picker_labels[label] = self.bufnr
-        self.label = label
-    end,
-    provider = function(self)
-        return self.label
-    end,
-    hl = { fg = "red", bold = true },
-}
-
--- The final touch!
-tab.TablineBufferBlock = utils.surround(
-    { "", "" },
-    function(self)
-        if self.is_active then
-            return utils.get_highlight("TabLineSel").bg
-        else
-            return utils.get_highlight("TabLine").bg
-        end
-    end,
-    { TablineFileNameBlock, TablineCloseButton, TablinePicker }
-)
 
 local Tabpage = {
     provider = function(self)
@@ -228,16 +191,33 @@ tab.TabLineOffset = {
     end,
 }
 
-tab.TabPages = {
-    -- only show this component if there's 2 or more tabpages
-    condition = function()
-        return true --#vim.api.nvim_list_tabpages() >= 2
+-- 快捷键跳转标签页的标记
+local TablinePicker = {
+    condition = function(self)
+        return self._show_picker
     end,
-    { provider = "%=" },
-    utils.make_tablist(Tabpage),
-    TabpageClose,
+    init = function(self)
+        local bufname = vim.api.nvim_buf_get_name(self.bufnr)
+        bufname = vim.fn.fnamemodify(bufname, ":t")
+        local label = bufname:sub(1, 1)
+        local i = 2
+        while self._picker_labels[label] do
+            if i > #bufname then
+                break
+            end
+            label = bufname:sub(i, i)
+            i = i + 1
+        end
+        self._picker_labels[label] = self.bufnr
+        self.label = label
+    end,
+    provider = function(self)
+        return self.label
+    end,
+    hl = { fg = "red", bold = true },
 }
 
+-- 快捷键跳转标签页
 vim.keymap.set("n", "gbp", function()
     local tabline = require("heirline").tabline
     local buflist = tabline._buflist[1]
@@ -253,6 +233,28 @@ vim.keymap.set("n", "gbp", function()
     vim.cmd.redrawtabline()
 end)
 
+-- 标签页
+tab.TablineBufferBlock = utils.surround(
+    { "󱎕", "" },
+    function(self)
+        if self.is_active then
+            return utils.get_highlight("TabLineSel").bg
+        else
+            return utils.get_highlight("TabLine").bg
+        end
+    end,
+    { TablineFileNameBlock, TablineCloseButton, TablinePicker }
+)
+-- 整个tab
+tab.TabPages = {
+    -- only show this component if there's 2 or more tabpages
+    condition = function()
+        return #vim.api.nvim_list_tabpages() >= 2
+    end,
+    { provider = "%=" },
+    utils.make_tablist(Tabpage),
+    TabpageClose,
+}
 tab.BufferLine = utils.make_buflist(
     tab.TablineBufferBlock,
     { provider = "", hl = { fg = "gray" } }, -- left truncation, optional (defaults to "<")

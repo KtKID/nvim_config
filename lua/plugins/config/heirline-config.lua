@@ -86,6 +86,7 @@ local FileStatusLine = {
     File.FileType,
     space,
     File.Ruler,
+    space,
     File.ScrollBar,
     space,
     File.FileEncoding,
@@ -98,7 +99,15 @@ local DefaultStatusLine = {
 local SpecialStatusline = {
 }
 local LspStatusLine = {
-    LspUI, LspUI.Diagnostics,
+    condition = function()
+        return conditions.buffer_matches({
+            -- buftype = { "nofile", "prompt", "help", "quickfix", },
+            -- filetype = { "^git.*", "fugitive", "*.lua" },
+            filetype = { "lua" },
+        })
+    end,
+    LspUI,
+    LspUI.Diagnostics,
 }
 
 local InactiveStatusline = {
@@ -108,19 +117,44 @@ local InactiveStatusline = {
 
 -- 最外层
 local StatusLine = {
-    VmodeUI, LspStatusLine, Align, space, FileStatusLine,
-}
-local WinBar = {
+    VmodeUI,
+    LspStatusLine,
+    Align,
+    space,
+    FileStatusLine,
+    hl = { bg = "dark_red" },
 }
 local TabLine = {
     Tab.TabLineOffset,
     Tab.BufferLine,
-    Tab.TabPages
+    Tab.TabPages,
+    --  hl = { bg = "gray" },
+}
+local WinBar = {
+    fallthrough = false,
+    { -- A special winbar for terminals
+        condition = function()
+            return conditions.buffer_matches({ buftype = { "terminal" } })
+        end,
+        utils.surround({ "", "" }, "dark_red", {
+            File.FileType,
+            space,
+            -- TerminalName,
+        }),
+    },
+    { -- An inactive winbar for regular files
+        condition = function()
+            return not conditions.is_active()
+        end,
+        utils.surround({ "", "" }, "bright_bg", { hl = { fg = "gray", force = true }, File.FileNameBlock }),
+    },
+    -- A winbar for regular files
+    utils.surround({ "", "" }, "bright_bg", File.FileNameBlock),
 }
 
 local heir = require("heirline").setup({
     statusline = StatusLine,
-    winbar = WinBar,
+    -- winbar = WinBar,
     tabline = TabLine,
     opts = {
         colors = colors,

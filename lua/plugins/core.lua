@@ -50,14 +50,14 @@ return {
             require("plugins/config/noice")()
         end,
     },
-    {
-        "Shatur/neovim-session-manager",
-        event = "VeryLazy",
-        dependencies = {
-            "nvim-lua/plenary.nvim"
-        },
-        -- config = require("plugins.config.session-config")
-    },
+    -- {
+    --     "Shatur/neovim-session-manager",
+    --     event = "VeryLazy",
+    --     dependencies = {
+    --         "nvim-lua/plenary.nvim"
+    --     },
+    --     config = require("plugins.config.session-config")
+    -- },
     {
         "SmiteshP/nvim-navic",
         -- lazy = true,

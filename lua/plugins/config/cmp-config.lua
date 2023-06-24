@@ -2,7 +2,6 @@ return function()
     local cmp = require("cmp")
 
     cmp.setup({
-        notify_show("cmp config !!!"),
         -- print("cmp setup")
         snippet = {
             -- REQUIRED - you must specify a snippet engine

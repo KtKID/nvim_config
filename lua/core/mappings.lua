@@ -187,6 +187,11 @@ if is_available "telescope.nvim" then
   --   { function() require("telescope").extensions.notify.notify() end, desc = "Find notifications" }
   -- end
   maps.n["<leader>fo"] = { function() require("telescope.builtin").oldfiles() end, desc = "Find history" }
+
+  -- project
+  maps.n["<leader>fp"] = { function() require("telescope").load_extension('projects') end, desc = "Find project" }
+  maps.n["<leader>fP"] = { function() require("telescope").extensions.projects.projects {} end, desc = "Find project" }
+
   maps.n["<leader>fr"] = { function() require("telescope.builtin").registers() end, desc = "Find registers" }
   maps.n["<leader>ft"] =
   { function() require("telescope.builtin").colorscheme { enable_preview = true } end, desc = "Find themes" }
@@ -216,10 +221,12 @@ if is_available "telescope.nvim" then
 
   maps.n["<leader>u"] = sections.u
 
-  maps.n["<leader>c"] = { "<cmd>lua require('telescope.builtin').colorscheme({enable_preview = true})<cr>" }
-  --   function ()
-  --   require('telescope.builtin').colorscheme({enable_preview = true})
-  -- end, desc = "colorscheme"}
+  maps.n["<leader>c"] = {
+    function()
+      require('telescope.builtin').colorscheme({ enable_preview = true })
+    end,
+    desc = "colorscheme"
+  }
 
   maps.n["<leader>u1"] = "gruvbox"
   maps.n["<leader>u1m"] = "mode"
@@ -229,6 +236,17 @@ if is_available "telescope.nvim" then
     end
   }
 end
+
+-- Session Manager
+-- if is_available "session_manager" then
+-- maps.n["<leader>s"] = sections.S
+-- maps.n["<leader>sl"] = { "<cmd>SessionManager! load_last_session<cr>", desc = "Load last session" }
+-- maps.n["<leader>ss"] = { "<cmd>SessionManager! save_current_session<cr>", desc = "Save this session" }
+-- maps.n["<leader>sd"] = { "<cmd>SessionManager! delete_session<cr>", desc = "Delete session" }
+-- maps.n["<leader>sf"] = { "<cmd>SessionManager! load_session<cr>", desc = "Search sessions" }
+-- maps.n["<leader>s."] =
+--   { "<cmd>SessionManager! load_current_dir_session<cr>", desc = "Load current directory session" }
+-- end
 
 -- print("ready set mappings")
 -- print_table(maps)

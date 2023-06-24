@@ -45,6 +45,7 @@ local colors = {
 
 local configPath = "plugins.config.ui."
 
+local Git = require(configPath .. "heirline-git")
 local File = require(configPath .. "heirline-file")
 local LspUI = require(configPath .. "heirline-lsp")
 local VimodeUI = require(configPath .. "heirline-vimode")
@@ -118,6 +119,9 @@ local InactiveStatusline = {
 -- 最外层
 local StatusLine = {
     VmodeUI,
+    space,
+    Git.gitBlock,
+    Align,
     LspStatusLine,
     Align,
     space,

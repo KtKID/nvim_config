@@ -8,21 +8,44 @@ return function()
     -- vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
     -- vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist)
 
+    local function print_workspace_folders()
+        local folders = vim.lsp.buf.list_workspace_folders()
+        print("Workspace folders:")
+        print_table(folders)
+        -- for _, folder in ipairs(folders) do
+        --     print(folder)
+        -- end
+    end
     local mappings = {
         n = {
-            ["gh"] = { function() vim.diagnostic.open_float() end,
-                desc = "Hover diagnostics",
-            },
-            ["gg"] = { function() vim.lsp.buf.definition() end,
-                desc = "Show the definition of current symbol",
-            },
+            ["ga"] = { vim.lsp.buf.code_action, desc = "Code action" },
+            ["gh"] = { vim.lsp.buf.hover, desc = "Hover diagnostics" },
+            ["gd"] = { vim.lsp.buf.definition, desc = "Show definition" },
+            ["gD"] = { vim.lsp.buf.declaration, desc = "Show declaration" },
+            ["gi"] = { vim.lsp.buf.implementation, desc = "Show implementation" },
             ["gr"] = {
-                function() 
-                    -- vim.lsp.buf.references() 
+                function()
+                    -- vim.lsp.buf.references()
                     require("telescope.builtin").lsp_references(require('telescope.themes').get_dropdown({}))
                 end,
                 desc = "References of current symbol",
-            }
+            },
+            ["gR"] = { vim.lsp.buf.rename, desc = "Rename" },
+            ["gp"] = { function()
+                print_stack_2file("this is lsp")
+            end, desc = "Show list_workspace_folders" },
+
+            ["gsh"] = { vim.lsp.buf.signature_help, desc = "Sign help" },
+            -- workspace
+            ["gwa"] = { vim.lsp.buf.add_workspace_folder, desc = "Add workspace folder" },
+            ["gwr"] = { vim.lsp.buf.remove_workspace_folder, desc = "Remove workspace folder" },
+
+            -- utils
+            ["gwl"] = { function()
+                print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+            end, desc = "Show list_workspace_folders" },
+            ["gx"] = { function()
+            end, desc = "Show list_workspace_folders" },
         }
     }
     print("set lsp mappings")

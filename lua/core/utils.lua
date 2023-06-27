@@ -1,14 +1,22 @@
 local U = {}
 
-function print_table(t, indent)
+function print_table(t, file, indent)
   indent = indent or 0
   for k, v in pairs(t) do
     local formatting = string.rep("  ", indent) .. k .. ": "
     if type(v) == "table" then
-      print(formatting)
+      if file then
+        print_file(formatting)
+      else
+        print(formatting)
+      end
       print_table(v, indent + 1)
     else
-      print(formatting .. tostring(v))
+      if file then
+        print_file(formatting .. tostring(v))
+      else
+        print(formatting .. tostring(v))
+      end
     end
   end
 end
@@ -17,6 +25,26 @@ function print_stack(...)
   -- 获取当前堆栈信息
   local traceback = debug.traceback("", 2)
   print(traceback, ...)
+end
+
+function print_stack_2file(...)
+  -- 获取当前堆栈信息
+  local traceback = debug.traceback("", 2)
+  print_file(traceback, ...)
+end
+
+function print_file(msg)
+  local path = vim.fn.stdpath("config") .. "/log.txt"
+  print(path)
+  local file = io.open(path, "a") -- 以写入模式打开文件
+
+  if file then                    -- 判断文件是否成功打开
+    file:write(msg)               -- 写入文件内容
+    file:close()                  -- 关闭文件
+    return true                   -- 返回写入成功
+  else
+    return false                  -- 返回写入失败
+  end
 end
 
 -- 滑动窗口tips

@@ -1,4 +1,3 @@
-print("this is tree config")
 -- disable netrw at the very start of your init.lua
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
@@ -71,8 +70,6 @@ end
 function tree.set_focus()
     local view = require'nvim-tree.view'
     local node = lib.get_node_at_cursor()
-    print("focus ")
-    print(node)
 
     -- 如果有node，则将其设置为焦点
     if node then
@@ -88,11 +85,9 @@ end
 function tree.toggle(path)
     local api = require("nvim-tree.api")
     if api.tree.is_visible() then
-        print("tree open")
         api.tree.close()
         return false
     else
-        --     api.tree.open(path)
         return true
     end
 end
@@ -117,20 +112,14 @@ local function on_attach(buff)
     vim.keymap.set('n', '<C-e>', api.node.open.replace_tree_buffer, opts('Open: In Place'))
     vim.keymap.set('n', '<C-f>', function ()
             local filePath = vim.fn.expand('%:p')
-            print(filePath)
             -- api.tree.find_file({update_root=true,focus=true})
     end)
     vim.keymap.set('n', '<C-k>', api.node.show_info_popup, opts('Info'))
     vim.keymap.set('n', '<C-n>', function ()
         api.node.navigate.opened.next()
-        print("next")
     end)
     vim.keymap.set('n', '<C-p>', function ()
         api.node.navigate.opened.prev()
-    end)
-    vim.keymap.set('n', '<C-p>', function ()
-        api.node.navigate.opened.prev()
-        print("next")
     end)
     vim.keymap.set('n', '<C-r>', api.fs.rename_sub, opts('Rename: Omit Filename'))
     vim.keymap.set('n', '<C-t>', api.node.open.tab, opts('Open: New Tab'))

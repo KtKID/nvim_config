@@ -27,7 +27,7 @@ return {
     "preservim/vim-markdown",
   },
   opts = {
-    dir = "C:\\Users\\kid\\Obs", -- no need to call 'vim.fn.expand' here
+    dir = "Obs\\test", -- no need to call 'vim.fn.expand' here
 
     -- Optional, if you keep notes in a specific subdirectory of your vault.
     notes_subdir = "notes",

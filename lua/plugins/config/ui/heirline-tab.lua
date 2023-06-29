@@ -93,9 +93,6 @@ local TablineCloseButton = {
         on_click = {
             callback = function(_, minwid)
                 local pages = vim.api.nvim_list_tabpages()
-                if pages then
-                    print_table(pages)
-                end
                 vim.schedule(function()
                     vim.api.nvim_buf_delete(minwid, { force = false })
                     vim.cmd.redrawtabline()
@@ -177,7 +174,6 @@ tab.TabLineOffset = {
     provider = function(self)
         local title = self.title
         local width = vim.api.nvim_win_get_width(self.winid)
-        print("width"..tostring(width))
         local pad = math.ceil((width - #title) / 2)
         return string.rep(" ", pad) .. title .. string.rep(" ", pad)
     end,

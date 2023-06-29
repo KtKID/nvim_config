@@ -36,7 +36,7 @@ return {
             "nvim-tree/nvim-web-devicons",
         },
         config = function()
-            require("plugins/config/nvim-tree")
+            require("plugins.config.nvim-tree")
         end
     },
     {
@@ -65,14 +65,19 @@ return {
         -- require("nvim-navic").setup()
     },
     {
-          "rebelot/heirline.nvim",
+        "rebelot/heirline.nvim",
         event = "BufEnter",
-        dependencies={
+        dependencies = {
             "SmiteshP/nvim-navic",
         },
-        config = function ()
+        config = function()
             require("plugins.config.heirline-config")
         end
+    },
+    {
+        "numToStr/Comment.nvim",
+        -- event = "BufEnter",
+        config = require("plugins.config.Comment-config"),
     },
     -- {
     --     'anuvyklack/pretty-fold.nvim',--折叠代码

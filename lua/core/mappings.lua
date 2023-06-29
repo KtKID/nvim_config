@@ -235,6 +235,16 @@ if is_available "telescope.nvim" then
       -- local box = require("gruvbox")
     end
   }
+
+  -- Comment
+  if is_available "Comment.nvim" then
+    maps.n["<leader>/"] = {
+      function() require("Comment.api").toggle.linewise.count(vim.v.count > 0 and vim.v.count or 1) end,
+      desc = "Comment line",
+    }
+    maps.v["<leader>/>"] =
+    { "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>", desc = "Toggle comment line" }
+  end
 end
 
 -- Session Manager

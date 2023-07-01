@@ -79,6 +79,13 @@ return {
         -- event = "BufEnter",
         config = require("plugins.config.Comment-config"),
     },
+    {
+        "windwp/nvim-autopairs",
+        event = "InsertEnter",
+        config = function()
+            require ("plugins.config.autopairs-config")
+        end
+    },
     -- {
     --     'anuvyklack/pretty-fold.nvim',--折叠代码
     --     config = function()

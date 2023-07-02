@@ -206,6 +206,9 @@ if is_available "telescope.nvim" then
   }
   maps.n["<leader>l"] = sections.l
   maps.n["<leader>lD"] = { function() require("telescope.builtin").diagnostics() end, desc = "Search diagnostics" }
+
+  maps.n["<leader>lf"] = { function() vim.lsp.buf.format() end, desc = "Format buffer" }
+
   maps.n["<leader>ls"] = {
     function()
       local aerial_avail, _ = pcall(require, "aerial")
@@ -244,6 +247,35 @@ if is_available "telescope.nvim" then
     }
     maps.v["<leader>/>"] =
     { "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>", desc = "Toggle comment line" }
+  end
+
+  -- Folding
+  if is_available "nvim-ufo" then
+    maps.n["zO"] = { function() require("ufo").openAllFolds() end, desc = "Open all folds" }
+    maps.n["zC"] = { function() require("ufo").closeAllFolds() end, desc = "Close all folds" }
+    maps.n["zr"] = { function() require("ufo").openFoldsExceptKinds() end, desc = "Fold less" }
+    maps.n["zm"] = { function() require("ufo").closeFoldsWith() end, desc = "Fold more" }
+    maps.n["zh"] = { function() require("ufo").peekFoldedLinesUnderCursor() end, desc = "Hover fold" }
+    maps.n["zn"] = {
+      function()
+        local ufo = require("ufo")
+        ufo.goNextClosedFold()
+      end,
+      desc = "Go Next fold"
+    }
+    maps.n["zp"] = {
+      function()
+        local ufo = require("ufo")
+        ufo.goPreviousClosedFold()
+        ufo.peekFoldedLinesUnderCursor()
+      end,
+      desc = "Go prev fold"
+    }
+    maps.n["zk"] = {
+      function()
+      end,
+      desc = "Peek fold"
+    }
   end
 end
 

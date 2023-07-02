@@ -83,7 +83,15 @@ return {
         "windwp/nvim-autopairs",
         event = "InsertEnter",
         config = function()
-            require ("plugins.config.autopairs-config")
+            require("plugins.config.autopairs-config")
+        end
+    },
+    {
+        "kevinhwang91/nvim-ufo",
+        event = { "InsertEnter" },
+        dependencies = { "kevinhwang91/promise-async" },
+        config = function()
+            require("plugins.config.ufo-config")
         end
     },
     -- {

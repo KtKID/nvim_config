@@ -121,4 +121,13 @@ end
 --   return U[icon_pack] and U[icon_pack][kind] or ""
 -- end
 
+function U.Capabilities()
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true
+  }
+  return capabilities
+end
+
 return U

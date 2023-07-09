@@ -4,6 +4,11 @@ _G.core = {}
 core.plugins = {}
 core.plugins.path = vim.fn.stdpath("config") .. "/lua/plugins"
 
+core.win_border = { '󱔐', '󱔐', '󱔐', '', '󱔐', '󱔐', '󱔐', '' }
+core.cmp_border = {}
+
+core.heirline_support_filetype = { "lua", "cpp" }
+
 --一些配置
 vim.o.number = true
 vim.o.shiftwidth = 4
@@ -28,7 +33,7 @@ vim.signcolumn = "yes"
 
 -- 折叠代码
 vim.o.foldcolumn = '1' -- '0' is not bad
-vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 -- 将.lua.txt 视为 lua
@@ -36,7 +41,7 @@ vim.api.nvim_exec([[ autocmd BufNewFile,BufRead *.lua.txt set filetype=lua ]], f
 
 --
 vim.fn.sign_define("DiagnosticSignError",
-    { text = " ", texthl = "DiagnosticSignError" })
+    { text = " ", texthl = "DiagnosticSignError" })
 vim.fn.sign_define("DiagnosticSignWarn",
     { text = " ", texthl = "DiagnosticSignWarn" })
 vim.fn.sign_define("DiagnosticSignInfo",
@@ -45,3 +50,11 @@ vim.fn.sign_define("DiagnosticSignHint",
     { text = "󰧑", texthl = "DiagnosticSignHint" })
 -- print(vim.fn.stdpath("data"))
 -- print(vim.fn.stdpath("cache"))
+-- vim.api.nvim_create_autocmd('xgt',{function ()
+--     print("xgt autocmd")
+
+-- end})
+
+function boot()
+
+end

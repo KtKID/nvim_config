@@ -50,14 +50,14 @@ return {
             require("plugins/config/noice")()
         end,
     },
-    -- {
-    --     "Shatur/neovim-session-manager",
-    --     event = "VeryLazy",
-    --     dependencies = {
-    --         "nvim-lua/plenary.nvim"
-    --     },
-    --     config = require("plugins.config.session-config")
-    -- },
+    {
+        "Shatur/neovim-session-manager",
+        event = "VeryLazy",
+        dependencies = {
+            "nvim-lua/plenary.nvim"
+        },
+        config = require("plugins.config.session-config")
+    },
     {
         "SmiteshP/nvim-navic",
         -- lazy = true,
@@ -94,6 +94,21 @@ return {
             require("plugins.config.ufo-config")
         end
     },
+    {
+        'stevearc/aerial.nvim',
+        event = "BufReadPost",
+        -- enabled = false,
+        -- Optional dependencies
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+            "nvim-tree/nvim-web-devicons"
+        },
+        -- config = require("plugins.config.aerial-config")
+        config = function ()
+            require("plugins.config.aerial-config")
+            
+        end
+    }
     -- {
     --     'anuvyklack/pretty-fold.nvim',--折叠代码
     --     config = function()

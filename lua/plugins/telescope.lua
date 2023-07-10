@@ -30,6 +30,16 @@ return {
             -- require('telescope.themes').get_ivy { width = 0.25, }
         },
     },
+    extensions = {
+        aerial = {
+            -- Display symbols as <root>.<parent>.<symbol>
+            show_nesting = {
+                ['_'] = true, -- This key will be the default
+                json = true, -- You can set the option for specific filetypes
+                yaml = true,
+            }
+        }
+    }
     -- file_browser = {
     --     theme = "dropdown",
     --     -- require('telescope.themes').get_ivy { width = 0.25, }

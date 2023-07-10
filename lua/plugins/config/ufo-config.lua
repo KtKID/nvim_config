@@ -1,7 +1,6 @@
 -- 代码折叠插件
 local ufo = require("ufo")
 local handler = function(virtText, lnum, endLnum, width, truncate)
-    print_file("handler " .. tostring(virtText) .. "\n")
     local newVirtText = {}
     local suffix = ('  %d '):format(endLnum - lnum)
     local sufWidth = vim.fn.strdisplaywidth(suffix)
@@ -26,7 +25,6 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
         curWidth = curWidth + chunkWidth
     end
     table.insert(newVirtText, { suffix, 'MoreMsg' })
-    print_table(newVirtText, true)
     return newVirtText
 end
 
@@ -43,7 +41,6 @@ ufo.setup(
         provider_selector = function(bufnr, filetype, buftype)
             -- if you prefer treesitter provider rather than lsp,
             -- return ftMap[filetype] or {'treesitter', 'indent'}
-            print_file("provider_selector " .. filetype .. "\n")
             return ftMap[filetype] or { 'treesitter' }
 
             -- refer to ./doc/example.lua for detail
@@ -52,7 +49,7 @@ ufo.setup(
         enable_get_fold_virt_text = true,
         preview = {
             win_config = {
-                border = { '󱔐', '󱔐', '󱔐', '', '󱔐', '󱔐', '󱔐', '' },
+                border = core.win_border,
                 winhighlight = 'Normal:Folded',
                 winblend = 0
             },

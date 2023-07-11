@@ -280,7 +280,7 @@ if is_available "telescope.nvim" then
   -- Folding
   if is_available "nvim-ufo" then
     maps.n["zoo"] = { function() require("ufo").openAllFolds() end, desc = "Open all folds" }
-    maps.n["zcc"] = { function() print_file("ufo close all") require("ufo").closeAllFolds() end, desc = "Close all folds" }
+    maps.n["zcc"] = { function() require("ufo").closeAllFolds() end, desc = "Close all folds" }
     maps.n["zr"] = { function() require("ufo").openFoldsExceptKinds() end, desc = "Fold less" }
     maps.n["zm"] = { function() require("ufo").closeFoldsWith() end, desc = "Fold more" }
     maps.n["zh"] = { function() require("ufo").peekFoldedLinesUnderCursor() end, desc = "Hover fold" }

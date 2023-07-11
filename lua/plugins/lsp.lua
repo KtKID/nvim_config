@@ -22,6 +22,7 @@ return {
     {
         "jose-elias-alvarez/null-ls.nvim",
         dependencies = { "nvim-lua/plenary.nvim" },
+        event = { "BufReadPre", "BufNewFile" },
         config = function()
             local null_ls = require("null-ls")
             local augroup = vim.api.nvim_create_augroup("LspFormatting", {})

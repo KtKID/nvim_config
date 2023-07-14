@@ -20,6 +20,23 @@ return {
         }
     },
     {
+    "folke/neodev.nvim",
+    opts = {
+      override = function(root_dir, library)
+        -- for _, astronvim_config in ipairs(astronvim.supported_configs) do
+        --   if root_dir:match(astronvim_config) then
+        --     library.plugins = true
+        --     break
+        --   end
+        -- end
+        -- vim.b.neodev_enabled = library.enabled
+      end,
+    },
+    config = function ()
+        require("plugins.config.neodev")
+    end
+    },
+    {
         "jose-elias-alvarez/null-ls.nvim",
         dependencies = { "nvim-lua/plenary.nvim" },
         event = { "BufReadPre", "BufNewFile" },

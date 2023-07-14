@@ -61,13 +61,33 @@ return {
         -- a dedicated handler.
         function(server_name) -- default handler (optional)
           if server_name == "lua_ls" then
+            pcall(require, "neodev")
             require("lspconfig")[server_name].setup {
               capabilities = utils.Capabilities(),
               settings = {
                 Lua = {
+                  workspace = {
+                    library = {
+                      [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                      [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+                    },
+                    maxPreload = 100000,
+                    preloadFileSize = 1000,
+                  },
+                  runtime = {
+                    -- LuaJIT in the case of Neovim
+                    version = "LuaJIT",
+                    path = { "?.lua", "?.lua.txt", "{workspace}/?.lua", "{workspace}/?.lua.txt" },
+                  },
                   diagnostics = {
                     enable = true,
-                    globals = { "vim" },
+                    globals = { "vim", "Color", "UIUtils" },
+                    severity = {
+                      ["undefined-global"] = "Error!",
+                    },
+                    neededFileStatus = {
+                      ["undefined-global"] = "Any",
+                    }
                   },
                 },
               },

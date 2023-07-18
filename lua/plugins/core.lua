@@ -56,7 +56,7 @@ return {
         dependencies = {
             "nvim-lua/plenary.nvim"
         },
-        config = require("plugins.config.session-config")
+        -- config = require("plugins.config.session-config")
     },
     {
         "SmiteshP/nvim-navic",
@@ -104,11 +104,13 @@ return {
             "nvim-tree/nvim-web-devicons"
         },
         -- config = require("plugins.config.aerial-config")
-        config = function ()
+        config = function()
             require("plugins.config.aerial-config")
-            
         end
-    }
+    },
+    {
+        'nvim-telescope/telescope-project.nvim',
+    },
     -- {
     --     'anuvyklack/pretty-fold.nvim',--折叠代码
     --     config = function()

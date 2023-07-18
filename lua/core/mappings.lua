@@ -217,7 +217,17 @@ if is_available "telescope.nvim" then
   maps.n["<leader>fo"] = { function() require("telescope.builtin").oldfiles() end, desc = "Find history" }
 
   -- project
-  maps.n["<leader>fp"] = { function() require("telescope").load_extension('projects') end, desc = "Find project" }
+  -- maps.n["<leader>fp"] = { function() require("telescope").load_extension('projects') end, desc = "Find project" }
+  maps.n["<leader>fp"] = {
+    function()
+      -- require("telescope").load_extension('project')
+      local project_nvim = require("project_nvim")
+      local recent_projects = project_nvim.get_recent_projects()
+
+      print(vim.inspect(recent_projects))
+    end,
+    desc = "Find project"
+  }
   maps.n["<leader>fP"] = { function() require("telescope").extensions.projects.projects {} end, desc = "Find project" }
 
   maps.n["<leader>fr"] = { function() require("telescope.builtin").registers() end, desc = "Find registers" }

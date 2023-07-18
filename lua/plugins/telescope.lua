@@ -35,11 +35,14 @@ return {
             -- Display symbols as <root>.<parent>.<symbol>
             show_nesting = {
                 ['_'] = true, -- This key will be the default
-                json = true, -- You can set the option for specific filetypes
+                json = true,  -- You can set the option for specific filetypes
                 yaml = true,
             }
-        }
-    }
+        },
+    },
+    config = function()
+        require("plugins.config.telescope-config")
+    end,
     -- file_browser = {
     --     theme = "dropdown",
     --     -- require('telescope.themes').get_ivy { width = 0.25, }

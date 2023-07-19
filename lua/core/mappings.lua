@@ -319,7 +319,28 @@ end
 
 -- Session Manager
 -- if is_available "session_manager" then
--- maps.n["<leader>s"] = sections.S
+maps.n["<leader>s"] = sections.S
+maps.n["<leader>ss"] = {function ()
+    local session = require("core.session")
+    print(session)
+    session.save_session()
+end, desc = "Save session" }
+
+maps.n["<leader>sl"] = {
+    function ()
+        require("core.session").list_session()
+    end,
+    desc = "Load last session" }
+maps.n["<leader>sd"] = {
+    function ()
+        require("core.session").delete_session()
+    end,
+    desc = "Del last session" }
+maps.n["<leader>sw"] = {
+    function ()
+        require("core.session").toggle_session()
+    end,
+    desc = "Toggle track session" }
 -- maps.n["<leader>sl"] = { "<cmd>SessionManager! load_last_session<cr>", desc = "Load last session" }
 -- maps.n["<leader>ss"] = { "<cmd>SessionManager! save_current_session<cr>", desc = "Save this session" }
 -- maps.n["<leader>sd"] = { "<cmd>SessionManager! delete_session<cr>", desc = "Delete session" }

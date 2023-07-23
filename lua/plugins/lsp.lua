@@ -21,6 +21,7 @@ return {
     },
     {
     "folke/neodev.nvim",
+    enabled = false,
     opts = {
       override = function(root_dir, library)
         -- for _, astronvim_config in ipairs(astronvim.supported_configs) do

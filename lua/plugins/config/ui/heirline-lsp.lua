@@ -1,18 +1,30 @@
--- The easy way.
--- local Navic = {
---     condition = function()
---         local con = require("nvim-navic").is_available()
---         print_stack("navic condition" .. con == true and "T" or "F")
---     end,
---     provider = function()
---         return require("nvim-navic").get_location({ highlight = true })
---     end,
---     update = 'CursorMoved'
--- }
+local conditions = require 'heirline.conditions'
+local lsp = {
+    condition = conditions.lsp_attached,
+    update    = { 'LspAttach', 'LspDetach' },
 
--- Full nerd (with icon colors and clickable elements)!
--- works in multi window, but does not support flexible components (yet ...)
-local Navic = {
+    -- You can keep it simple,
+    -- provider = " [LSP]",
+
+    -- Or complicate things a bit and get the servers names
+    provider  = function()
+        local names = {}
+        local a = 1
+        local active = false
+        for i, server in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
+            table.insert(names, server.name)
+            active = true
+        end
+        if active then
+            return " [" .. table.concat(names, " ") .. "]"
+        else
+            return " Not LSP Activated"
+        end
+    end,
+    -- hl        = { fg = "green", bold = true },
+}
+
+lsp.Navic = {
     condition = function()
         -- local con = require("nvim-navic").is_available()
         local con = require("nvim-navic")
@@ -68,6 +80,7 @@ local Navic = {
         for i, d in ipairs(data) do
             -- encode line and column numbers into a single integer
             local pos = self.enc(d.scope.start.line, d.scope.start.character, self.winnr)
+            local line_num = d.scope["start"].line
             local child = {
                 {
                     provider = d.icon,
@@ -91,6 +104,10 @@ local Navic = {
                     },
                 },
             }
+            table.insert(child, {
+                provider = "[" .. tonumber(line_num) .. "]",
+                hl = { fg = 'bright_fg' },
+            })
             -- add a separator only if needed
             if #data > 1 and i < #data then
                 table.insert(child, {
@@ -111,32 +128,6 @@ local Navic = {
     update = 'CursorMoved'
 }
 
-
-local conditions = require 'heirline.conditions'
-local lsp = {
-    condition = conditions.lsp_attached,
-    update    = { 'LspAttach', 'LspDetach' },
-
-    -- You can keep it simple,
-    -- provider = " [LSP]",
-
-    -- Or complicate things a bit and get the servers names
-    provider  = function()
-        local names = {}
-        local a = 1
-        local active = false
-        for i, server in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
-            table.insert(names, server.name)
-            active = true
-        end
-        if active then
-            return " [" .. table.concat(names, " ") .. "]"
-        else
-            return " Not LSP Activated"
-        end
-    end,
-    -- hl        = { fg = "green", bold = true },
-}
 
 lsp.Diagnostics = {
 

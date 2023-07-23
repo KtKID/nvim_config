@@ -54,7 +54,3 @@ vim.fn.sign_define("DiagnosticSignHint",
 --     print("xgt autocmd")
 
 -- end})
-
-function boot()
-
-end

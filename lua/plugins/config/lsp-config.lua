@@ -22,6 +22,19 @@ return function()
             ["gh"] = { vim.lsp.buf.hover, desc = "Hover diagnostics" },
             ["gd"] = { vim.lsp.buf.definition, desc = "Show definition" },
             ["gD"] = { vim.lsp.buf.declaration, desc = "Show declaration" },
+            ["gcl"] = { function()
+                local clients = vim.lsp.buf_get_clients()
+                if clients then
+                    for _, client in ipairs(clients) do
+                        if client then
+                            print("Client name: " .. client.name)
+                        end
+                        -- if client.resolved_capabilities.document_formatting then
+                        --     print("Current LSP client supports document formatting")
+                        -- end
+                    end
+                end
+            end, desc = "Show format" },
             ["gi"] = { vim.lsp.buf.implementation, desc = "Show implementation" },
             ["gr"] = {
                 function()
@@ -48,6 +61,5 @@ return function()
             end, desc = "Show list_workspace_folders" },
         }
     }
-    print("set lsp mappings")
     require("core/utils").set_mappings(mappings)
 end

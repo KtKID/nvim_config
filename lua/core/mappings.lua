@@ -320,27 +320,33 @@ end
 -- Session Manager
 -- if is_available "session_manager" then
 maps.n["<leader>s"] = sections.S
-maps.n["<leader>ss"] = {function ()
+maps.n["<leader>ss"] = {
+  function()
     local session = require("core.session")
     print(session)
     session.save_session()
-end, desc = "Save session" }
+  end,
+  desc = "Save session"
+}
 
 maps.n["<leader>sl"] = {
-    function ()
-        require("core.session").list_session()
-    end,
-    desc = "Load last session" }
+  function()
+    require("core.session").list_session()
+  end,
+  desc = "Load last session"
+}
 maps.n["<leader>sd"] = {
-    function ()
-        require("core.session").delete_session()
-    end,
-    desc = "Del last session" }
+  function()
+    require("core.session").delete_session()
+  end,
+  desc = "Del last session"
+}
 maps.n["<leader>sw"] = {
-    function ()
-        require("core.session").toggle_session()
-    end,
-    desc = "Toggle track session" }
+  function()
+    require("core.session").toggle_session()
+  end,
+  desc = "Toggle track session"
+}
 -- maps.n["<leader>sl"] = { "<cmd>SessionManager! load_last_session<cr>", desc = "Load last session" }
 -- maps.n["<leader>ss"] = { "<cmd>SessionManager! save_current_session<cr>", desc = "Save this session" }
 -- maps.n["<leader>sd"] = { "<cmd>SessionManager! delete_session<cr>", desc = "Delete session" }
@@ -349,6 +355,54 @@ maps.n["<leader>sw"] = {
 --   { "<cmd>SessionManager! load_current_dir_session<cr>", desc = "Load current directory session" }
 -- end
 
--- print("ready set mappings")
--- print_table(maps)
+
+maps.n["<leader>d"] = sections.d
+maps.n["<leader>dc"] = {
+  function()
+    require('dap').set_breakpoint(vim.fn.input '[Condition] > ')
+  end,
+  desc = "Conditional Breakpoint"
+}
+maps.n["<leader>d1"] = {
+  function()
+    require("osv").launch({
+      host = "127.0.0.1",
+      port = 9999,
+      config_file = "C:\\Users\\kid\\AppData\\Local\\nvim\\osv_config.txt",
+      log = true,
+    })
+  end,
+  desc = "OSV launch"
+}
+maps.n["<leader>d2"] = {
+  function()
+    require("osv").run_this({
+      config_file = "C:\\Users\\kid\\AppData\\Local\\nvim\\osv_config.txt",
+      log = true,
+    })
+    -- require('dap').run_to_cursor()
+  end,
+  desc = "OSV run this"
+}
+maps.n["<leader>d3"] = {
+  function()
+    require("osv").stop({
+    })
+  end,
+  desc = "OSV stop"
+}
+maps.n["<leader>d4"] = {
+  function()
+    local running = require('osv').is_running()
+    print(tostring(running))
+  end,
+  desc = "OSV is running"
+}
+maps.n["<leader>du"] = {
+  function()
+    require('dapui').toggle()
+  end,
+  desc = "toggle UI"
+}
+
 utils.set_mappings(maps)

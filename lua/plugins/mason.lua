@@ -61,7 +61,7 @@ return {
         -- a dedicated handler.
         function(server_name) -- default handler (optional)
           if server_name == "lua_ls" then
-            pcall(require, "neodev")
+            -- pcall(require, "neodev")
             require("lspconfig")[server_name].setup {
               capabilities = utils.Capabilities(),
               settings = {
@@ -91,8 +91,24 @@ return {
                   },
                 },
               },
+              on_attach = function(client, bufnr)
+                print_file("lua_ls on_attach")
+                local navic = require("nvim-navic")
+                navic.attach(client, bufnr)
+              end
             }
             return
+          elseif server_name == "clangd" then
+            require("lspconfig")[server_name].setup {
+              capabilities = utils.Capabilities(),
+              on_attach = function(client, bufnr)
+                print_file("clangd on_attach")
+                local navic = require("nvim-navic")
+                if navic then
+                  navic.attach(client, bufnr)
+                end
+              end
+            }
           else
             require("lspconfig")[server_name].setup {}
           end

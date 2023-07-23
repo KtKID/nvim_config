@@ -107,6 +107,8 @@ local LspStatusLine = {
             filetype = core.heirline_support_filetype
         })
     end,
+    LspUI.Navic, -- 显示代码上下文位置
+    Align,
     LspUI,
     LspUI.Diagnostics,
 }
@@ -121,7 +123,6 @@ local StatusLine = {
     VmodeUI,
     space,
     Git.gitBlock,
-    Align,
     LspStatusLine,
     Align,
     space,

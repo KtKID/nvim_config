@@ -111,6 +111,15 @@ return {
     {
         'nvim-telescope/telescope-project.nvim',
     },
+    {
+        'akinsho/toggleterm.nvim',
+        version = "*",
+        -- cmd = { "ToggleTerm", "TermExec" },
+        event = "VeryLazy",
+        config = function()
+            require("plugins.config.term-config")
+        end
+    }
     -- {
     --     'anuvyklack/pretty-fold.nvim',--折叠代码
     --     config = function()

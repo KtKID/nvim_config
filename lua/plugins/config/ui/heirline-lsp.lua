@@ -28,7 +28,7 @@ lsp.Navic = {
     condition = function()
         -- local con = require("nvim-navic").is_available()
         local con = require("nvim-navic")
-        print("navic condition" .. (con ~= nil and "T" or "F"))
+        -- print("navic condition" .. (con ~= nil and "T" or "F"))
         return true
     end,
     static = {

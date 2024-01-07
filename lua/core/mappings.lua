@@ -17,7 +17,7 @@ local sections = {
   l = { desc = " LSP" },
   p = { desc = "󰏖 Packages" },
   S = { desc = "󱂬 Session" },
-  t = { desc = " Terminal" },
+  t = { desc = "$ Terminal" },
   u = { desc = " UI" },
 }
 
@@ -346,6 +346,31 @@ maps.n["<leader>sw"] = {
     require("core.session").toggle_session()
   end,
   desc = "Toggle track session"
+}
+
+maps.n["<leader>t"] = {desc = " Terminal"}
+-- maps.n["<leader>ts"] = {
+--   function()
+--       require("plugins.config.term-config").set_term_keymaps()
+--   end
+-- }
+maps.n["<leader>th"] = {
+    "<cmd>ToggleTerm direction=horizontal<cr>", desc = " Terminal horizontal"
+}
+maps.n["<leader>tv"] = {
+    "<cmd>ToggleTerm direction=vertical<cr>", desc = " Terminal vertical"
+}
+maps.n["<leader>tp"] = {
+  function()
+    print("toggle term")
+    -- require("toggleterm").setup()
+  end
+}
+maps.t["<C-\\"] = {
+  function()
+    print("toggle term")
+    -- require("toggleterm").setup()
+  end
 }
 -- maps.n["<leader>sl"] = { "<cmd>SessionManager! load_last_session<cr>", desc = "Load last session" }
 -- maps.n["<leader>ss"] = { "<cmd>SessionManager! save_current_session<cr>", desc = "Save this session" }

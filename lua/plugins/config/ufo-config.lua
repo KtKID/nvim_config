@@ -49,7 +49,7 @@ ufo.setup(
         enable_get_fold_virt_text = true,
         preview = {
             win_config = {
-                border = core.win_border,
+                border = gCore.win_border,
                 winhighlight = 'Normal:Folded',
                 winblend = 0
             },

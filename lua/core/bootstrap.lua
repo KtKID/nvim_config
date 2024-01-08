@@ -1,13 +1,13 @@
 -- Desc: Bootstrap the core
-_G.core = {}
+_G.gCore = {}
 
-core.plugins = {}
-core.plugins.path = vim.fn.stdpath("config") .. "/lua/plugins"
+gCore.plugins = {}
+-- core.plugins.path = vim.fn.stdpath("config") .. "/lua/plugins"
 
-core.win_border = { '󱔐', '󱔐', '󱔐', '', '󱔐', '󱔐', '󱔐', '' }
-core.cmp_border = {}
+gCore.win_border = { '󱔐', '󱔐', '󱔐', '', '󱔐', '󱔐', '󱔐', '' }
+gCore.cmp_border = {}
 
-core.heirline_support_filetype = { "lua", "cpp" }
+gCore.heirline_support_filetype = { "lua", "cpp" }
 
 --一些配置
 vim.o.number = true

@@ -238,7 +238,7 @@ require("aerial").setup({
     -- Options for opening aerial in a floating win
     float = {
         -- Controls border appearance. Passed to nvim_open_win
-        border = core.win_border,
+        border = gCore.win_border,
 
         -- Determines location of floating window
         --   cursor - Opens float on top of the cursor
@@ -263,7 +263,7 @@ require("aerial").setup({
 
     -- Options for the floating nav windows
     nav = {
-        border = core.win_border, --"rounded",
+        border = gCore.win_border, --"rounded",
         max_height = 0.9,
         min_height = { 10, 0.1 },
         max_width = 0.5,

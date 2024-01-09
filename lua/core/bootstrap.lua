@@ -30,6 +30,7 @@ vim.o.cursorline = true
 -- 终端真彩色
 vim.o.termguicolors = true
 vim.signcolumn = "yes"
+vim.o.background = ""
 
 -- 折叠代码
 vim.o.foldcolumn = '1' -- '0' is not bad

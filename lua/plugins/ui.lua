@@ -21,9 +21,10 @@ return {
     -- Colorscheme
     {
         {
-            "ellisonleao/gruvbox.nvim",
+            -- "ellisonleao/gruvbox.nvim",
+            "rebelot/kanagawa.nvim",
             priority = 1000,
-            config = require("plugins.config.colorscheme")
+            config = require("plugins.config.colorscheme"),
         },
     }
 }

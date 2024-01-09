@@ -67,7 +67,7 @@ local VmodeUI =
         return conditions.buffer_matches({
             -- buftype = { "nofile", "prompt", "help", "quickfix", },
             -- filetype = { "^git.*", "fugitive", "*.lua" },
-            filetype = core.heirline_support_filetype
+            filetype = gCore.heirline_support_filetype
         })
     end,
     VimodeUI,
@@ -77,7 +77,7 @@ local FileStatusLine = {
         return conditions.buffer_matches({
             -- buftype = { "nofile", "prompt", "help", "quickfix", },
             -- filetype = { "^git.*", "fugitive", "*.lua" },
-            filetype = core.heirline_support_filetype
+            filetype = gCore.heirline_support_filetype
         })
     end,
     space,
@@ -104,7 +104,7 @@ local LspStatusLine = {
         return conditions.buffer_matches({
             -- buftype = { "nofile", "prompt", "help", "quickfix", },
             -- filetype = { "^git.*", "fugitive", "*.lua" },
-            filetype = core.heirline_support_filetype
+            filetype = gCore.heirline_support_filetype
         })
     end,
     LspUI.Navic, -- 显示代码上下文位置

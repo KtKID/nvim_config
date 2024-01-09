@@ -1,5 +1,4 @@
 local tel = require('telescope')
-print("telescope-config.lua")
 local project_actions = require("telescope._extensions.project.actions")
 tel.setup {
     extensions = {

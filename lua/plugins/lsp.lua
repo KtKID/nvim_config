@@ -20,26 +20,27 @@ return {
         }
     },
     {
-    "folke/neodev.nvim",
-    enabled = false,
-    opts = {
-      override = function(root_dir, library)
-        -- for _, astronvim_config in ipairs(astronvim.supported_configs) do
-        --   if root_dir:match(astronvim_config) then
-        --     library.plugins = true
-        --     break
-        --   end
-        -- end
-        -- vim.b.neodev_enabled = library.enabled
-      end,
-    },
-    config = function ()
-        require("plugins.config.neodev")
-    end
+        "folke/neodev.nvim",
+        enabled = false,
+        opts = {
+            override = function(root_dir, library)
+                -- for _, astronvim_config in ipairs(astronvim.supported_configs) do
+                --   if root_dir:match(astronvim_config) then
+                --     library.plugins = true
+                --     break
+                --   end
+                -- end
+                -- vim.b.neodev_enabled = library.enabled
+            end,
+        },
+        config = function()
+            require("plugins.config.neodev")
+        end
     },
     {
         "jose-elias-alvarez/null-ls.nvim",
         dependencies = { "nvim-lua/plenary.nvim" },
+        enabled = false,
         event = { "BufReadPre", "BufNewFile" },
         config = function()
             local null_ls = require("null-ls")
@@ -67,7 +68,7 @@ return {
 
                         if res then
                             local client = vim.lsp.get_client_by_id(ctx.client_id)
-                            vim.lsp.util.apply_text_edits(res, bufnr, client and client.offset_encoding or "utf-16")
+                            vim.lsp.util.apply_text_edits(res, bufnr, client and client.offset_encoding or "utf-8")
                             vim.api.nvim_buf_call(bufnr, function()
                                 vim.cmd("silent noautocmd update")
                             end)

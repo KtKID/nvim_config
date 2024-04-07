@@ -33,10 +33,11 @@ function print_stack_2file(...)
   print_file(traceback, ...)
 end
 
-function print_file(msg)
+function print_file(msg,...)
   local path = vim.fn.stdpath("config") .. "/log.txt"
   print(path)
   local file = io.open(path, "a") -- 以写入模式打开文件
+  
 
   if file then                    -- 判断文件是否成功打开
     file:write(msg)               -- 写入文件内容

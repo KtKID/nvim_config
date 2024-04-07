@@ -8,6 +8,7 @@ gCore.win_border = { '󱔐', '󱔐', '󱔐', '', '󱔐', '󱔐', '󱔐', '
 gCore.cmp_border = {}
 
 gCore.heirline_support_filetype = { "lua", "cpp" }
+gCore.colors = require("plugins.config.ui.colors")
 
 --一些配置
 vim.o.number = true
@@ -40,6 +41,8 @@ vim.o.foldenable = true
 -- 将.lua.txt 视为 lua
 vim.api.nvim_exec([[ autocmd BufNewFile,BufRead *.lua.txt set filetype=lua ]], false)
 
+vim.o.makeprg = 'xmake'
+
 --
 vim.fn.sign_define("DiagnosticSignError",
     { text = " ", texthl = "DiagnosticSignError" })
@@ -51,7 +54,3 @@ vim.fn.sign_define("DiagnosticSignHint",
     { text = "󰧑", texthl = "DiagnosticSignHint" })
 -- print(vim.fn.stdpath("data"))
 -- print(vim.fn.stdpath("cache"))
--- vim.api.nvim_create_autocmd('xgt',{function ()
---     print("xgt autocmd")
-
--- end})

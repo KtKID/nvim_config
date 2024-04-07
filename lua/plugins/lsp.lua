@@ -68,7 +68,7 @@ return {
 
                         if res then
                             local client = vim.lsp.get_client_by_id(ctx.client_id)
-                            vim.lsp.util.apply_text_edits(res, bufnr, client and client.offset_encoding or "utf-8")
+                            -- vim.lsp.util.apply_text_edits(res, bufnr, client and client.offset_encoding or "utf-8")
                             vim.api.nvim_buf_call(bufnr, function()
                                 vim.cmd("silent noautocmd update")
                             end)

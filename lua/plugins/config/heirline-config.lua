@@ -127,7 +127,7 @@ local StatusLine = {
     Align,
     space,
     FileStatusLine,
-    hl = { bg = "dark_red" },
+    hl = { bg = gCore.colors.waveBlue1 },
 }
 local TabLine = {
     Tab.TabLineOffset,

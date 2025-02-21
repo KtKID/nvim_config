@@ -2,7 +2,7 @@ local utils = require "core.utils"
 local is_available = utils.is_available
 
 -- 原生vim命令
-vim.api.nvim_set_keymap("i", "ii", "<Esc>", { noremap = true })
+vim.api.nvim_set_keymap("i", "jj", "<Esc>", { noremap = true })
 
 -- i = insert mode n = normal mode v = visual mode t = terminal mode
 local maps = { i = {}, n = {}, v = {}, t = {} }
@@ -15,6 +15,7 @@ local sections = {
   f = { desc = "󰍉 Find" },
   g = { desc = "󰊢 Git" },
   l = { desc = " LSP" },
+  o = { desc = "󰏖 LLM" },
   p = { desc = "󰏖 Packages" },
   S = { desc = "󱂬 Session" },
   t = { desc = "$ Terminal" },
@@ -205,7 +206,14 @@ if is_available "telescope.nvim" then
 
   --Layout
   maps.n["<leader>fl"] = {
-    function() require 'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({})) end,
+    function()
+      require 'telescope.builtin'.find_files(require('telescope.themes').horizontal({
+        size = {
+          width = "30%",
+          height = "30%",
+        },
+      }))
+    end,
     desc = "Find man"
   }
 
@@ -348,17 +356,17 @@ maps.n["<leader>sw"] = {
   desc = "Toggle track session"
 }
 
-maps.n["<leader>t"] = {desc = " Terminal"}
+maps.n["<leader>t"] = { desc = " Terminal" }
 -- maps.n["<leader>ts"] = {
 --   function()
 --       require("plugins.config.term-config").set_term_keymaps()
 --   end
 -- }
 maps.n["<leader>th"] = {
-    "<cmd>ToggleTerm direction=horizontal<cr>", desc = " Terminal horizontal"
+  "<cmd>ToggleTerm direction=horizontal<cr>", desc = " Terminal horizontal"
 }
 maps.n["<leader>tv"] = {
-    "<cmd>ToggleTerm direction=vertical<cr>", desc = " Terminal vertical"
+  "<cmd>ToggleTerm direction=vertical<cr>", desc = " Terminal vertical"
 }
 maps.n["<leader>tp"] = {
   function()
@@ -428,6 +436,20 @@ maps.n["<leader>du"] = {
     require('dapui').toggle()
   end,
   desc = "toggle UI"
+}
+
+maps.n["<leader>o"] = { desc = "LLM is running" }
+maps.v["<leader>oa"] = {
+  "<cmd>LLMSelectedTextHandler 请解释下面这段代码<cr>", desc = "LLMSelectedTextHandler"
+}
+maps.n["<leader>oo"] = {
+  "<cmd>LLMSessionToggle<cr> 切换LLMSession<cr>", desc = "LLMSessionToggle"
+}
+maps.n["<leader>ou"] = {
+  "<cmd>LLMAppHandler UserInfo<cr>", desc = "UserInfo"
+}
+maps.n["<leader>oe"] = {
+  "<cmd>LLMAppHandler UserInfo<cr>", desc = "UserInfo"
 }
 
 utils.set_mappings(maps)

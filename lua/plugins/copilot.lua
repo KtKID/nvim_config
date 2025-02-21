@@ -1,13 +1,14 @@
 return {
-    "github/copilot.vim",
-    cmd = {
-        "Copilot status",
-        "Copilot enable",
-        "Copilot disable",
-        "Copilot setup",
-        "Copilot enable",
-    },
-    event = "InsertEnter",
+    -- enable = false,
+    -- "github/copilot.vim",
+    -- cmd = {
+    --     "Copilot status",
+    --     "Copilot enable",
+    --     "Copilot disable",
+    --     "Copilot setup",
+    --     "Copilot enable",
+    -- },
+    -- event = "InsertEnter",
 }
 -- return {
 --     "zbirenbaum/copilot.lua",

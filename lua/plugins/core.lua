@@ -113,11 +113,19 @@ return {
     },
     {
         'akinsho/toggleterm.nvim',
-        version = "*",
+        -- version = "*",
         -- cmd = { "ToggleTerm", "TermExec" },
         event = "VeryLazy",
         config = function()
             require("plugins.config.term-config")
+        end
+    },
+    {
+        "Kurama622/llm.nvim",
+        dependencies = { "nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim" },
+        cmd = { "LLMSessionToggle", "LLMSelectedTextHandler", "LLMAppHandler" },
+        config = function ()
+            require("plugins.config.llmcode-config")
         end
     }
     -- {
